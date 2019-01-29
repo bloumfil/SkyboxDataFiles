@@ -1,0 +1,391 @@
+[
+    {
+        "Name": "Internet", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "Internet"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "F5WebFarm", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "Workstations", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "Workstations", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "SecOps", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "Forti-vSRX", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<FortiLAN>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<FortiDMZ>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "FortiLAN", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "FortiDMZ", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "PALAN", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "PA-vSRX", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<PALAN>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "CP-vSRX", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<Internet>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<F5WebFarm>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<CP-F5>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "Management", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "CSR-ASAv", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<ASAv-vSRX>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "ASAv-vSRX", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "CP-F5", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<F5WebFarm>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "PC01", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }, 
+    {
+        "Name": "SRV01", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "Virtual Network"
+            }
+        ]
+    }
+]
