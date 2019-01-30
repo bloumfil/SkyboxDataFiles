@@ -297,6 +297,14 @@
             {
                 "cidr": "<<ASAv-vSRX>>", 
                 "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<PC01>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<SRV01>>", 
+                "destination": "<<External_Subnet>>"
             }
         ]
     }, 
@@ -318,6 +326,14 @@
             {
                 "cidr": "<<self_CIDR>>", 
                 "destination": "Virtual Network"
+            }, 
+            {
+                "cidr": "<<PC01>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<SRV01>>", 
+                "destination": "<<External_Subnet>>"
             }
         ]
     }, 
