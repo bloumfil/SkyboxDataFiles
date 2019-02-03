@@ -16,7 +16,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -37,7 +37,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -58,7 +58,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -79,7 +79,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -100,7 +100,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<FortiLAN>>", 
@@ -129,7 +129,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -150,7 +150,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -171,7 +171,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -192,7 +192,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<PALAN>>", 
@@ -217,7 +217,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<Internet>>", 
@@ -250,7 +250,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -271,7 +271,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<ASAv-vSRX>>", 
@@ -304,7 +304,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<PC01>>", 
@@ -333,7 +333,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }, 
             {
                 "cidr": "<<F5WebFarm>>", 
@@ -358,7 +358,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }, 
@@ -379,7 +379,7 @@
             }, 
             {
                 "cidr": "<<self_CIDR>>", 
-                "destination": "VirtualNetwork"
+                "destination": "VnetLocal"
             }
         ]
     }
