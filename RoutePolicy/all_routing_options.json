@@ -63,27 +63,6 @@
         ]
     }, 
     {
-        "Name": "Workstations", 
-        "routes": [
-            {
-                "cidr": "0.0.0.0/0", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "10.0.0.0/8", 
-                "destination": "None"
-            }, 
-            {
-                "cidr": "<<sandbox_wide_subnet>>", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "<<self_CIDR>>", 
-                "destination": "Virtual Network"
-            }
-        ]
-    }, 
-    {
         "Name": "SecOps", 
         "routes": [
             {
