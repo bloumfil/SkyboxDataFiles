@@ -67,7 +67,7 @@
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
-                "destination": "<<Internal_Subnet>>"
+                "destination": "Internet"
             }, 
             {
                 "cidr": "10.0.0.0/8", 
@@ -205,7 +205,7 @@
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
-                "destination": "<<Internal_Subnet>>"
+                "destination": "<<External_Subnet>>"
             }, 
             {
                 "cidr": "10.0.0.0/8", 
@@ -272,10 +272,6 @@
             {
                 "cidr": "<<self_CIDR>>", 
                 "destination": "VnetLocal"
-            }, 
-            {
-                "cidr": "<<ASAv-vSRX>>", 
-                "destination": "<<External_Subnet>>"
             }, 
             {
                 "cidr": "<<PC01>>", 
