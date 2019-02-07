@@ -1,10 +1,10 @@
 [
     {
-        "Name": "Internet", 
+        "Name": "Checkpoint Web Public", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
-                "destination": "Internet"
+                "destination": "Checkpoint Web Public"
             }, 
             {
                 "cidr": "10.0.0.0/8", 
@@ -21,7 +21,7 @@
         ]
     }, 
     {
-        "Name": "F5WebFarm", 
+        "Name": "DMZ_Server_Farm", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -42,7 +42,7 @@
         ]
     }, 
     {
-        "Name": "Workstations", 
+        "Name": "Clients", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -84,7 +84,7 @@
         ]
     }, 
     {
-        "Name": "Forti-vSRX", 
+        "Name": "App_DB_Transit", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -103,38 +103,17 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<FortiLAN>>", 
+                "cidr": "<<App_Developers>>", 
                 "destination": "<<External_Subnet>>"
             }, 
             {
-                "cidr": "<<FortiDMZ>>", 
+                "cidr": "<<Internal DB>>", 
                 "destination": "<<External_Subnet>>"
             }
         ]
     }, 
     {
-        "Name": "FortiLAN", 
-        "routes": [
-            {
-                "cidr": "0.0.0.0/0", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "10.0.0.0/8", 
-                "destination": "None"
-            }, 
-            {
-                "cidr": "<<sandbox_wide_subnet>>", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "<<self_CIDR>>", 
-                "destination": "VnetLocal"
-            }
-        ]
-    }, 
-    {
-        "Name": "FortiDMZ", 
+        "Name": "App_Developers", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -155,7 +134,7 @@
         ]
     }, 
     {
-        "Name": "PALAN", 
+        "Name": "Internal DB", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -176,65 +155,7 @@
         ]
     }, 
     {
-        "Name": "PA-vSRX", 
-        "routes": [
-            {
-                "cidr": "0.0.0.0/0", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "10.0.0.0/8", 
-                "destination": "None"
-            }, 
-            {
-                "cidr": "<<sandbox_wide_subnet>>", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "<<self_CIDR>>", 
-                "destination": "VnetLocal"
-            }, 
-            {
-                "cidr": "<<PALAN>>", 
-                "destination": "<<External_Subnet>>"
-            }
-        ]
-    }, 
-    {
-        "Name": "CP-vSRX", 
-        "routes": [
-            {
-                "cidr": "0.0.0.0/0", 
-                "destination": "<<External_Subnet>>"
-            }, 
-            {
-                "cidr": "10.0.0.0/8", 
-                "destination": "None"
-            }, 
-            {
-                "cidr": "<<sandbox_wide_subnet>>", 
-                "destination": "<<Internal_Subnet>>"
-            }, 
-            {
-                "cidr": "<<self_CIDR>>", 
-                "destination": "VnetLocal"
-            }, 
-            {
-                "cidr": "<<Internet>>", 
-                "destination": "<<External_Subnet>>"
-            }, 
-            {
-                "cidr": "<<F5WebFarm>>", 
-                "destination": "<<External_Subnet>>"
-            }, 
-            {
-                "cidr": "<<CP-F5>>", 
-                "destination": "<<External_Subnet>>"
-            }
-        ]
-    }, 
-    {
-        "Name": "Management", 
+        "Name": "Internal_Servers", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -255,7 +176,86 @@
         ]
     }, 
     {
-        "Name": "CSR-ASAv", 
+        "Name": "Internal_Transit", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }, 
+            {
+                "cidr": "<<Internal_Servers>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "Checkpoint Web Private", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }, 
+            {
+                "cidr": "<<Checkpoint Web Public>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<DMZ_Server_Farm>>", 
+                "destination": "<<External_Subnet>>"
+            }, 
+            {
+                "cidr": "<<DMZ>>", 
+                "destination": "<<External_Subnet>>"
+            }
+        ]
+    }, 
+    {
+        "Name": "Management Servers", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }
+        ]
+    }, 
+    {
+        "Name": "CSRV", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -284,7 +284,7 @@
         ]
     }, 
     {
-        "Name": "ASAv-vSRX", 
+        "Name": "ASAv", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -313,7 +313,7 @@
         ]
     }, 
     {
-        "Name": "CP-F5", 
+        "Name": "DMZ", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -332,7 +332,7 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<F5WebFarm>>", 
+                "cidr": "<<DMZ_Server_Farm>>", 
                 "destination": "<<External_Subnet>>"
             }
         ]
