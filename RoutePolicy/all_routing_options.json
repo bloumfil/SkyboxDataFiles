@@ -1,10 +1,10 @@
 [
     {
-        "Name": "Checkpoint Web Public", 
+        "Name": "Checkpoint_Web_Public", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
-                "destination": "Checkpoint Web Public"
+                "destination": "Checkpoint_Web_Public"
             }, 
             {
                 "cidr": "10.0.0.0/8", 
@@ -107,7 +107,7 @@
                 "destination": "<<External_Subnet>>"
             }, 
             {
-                "cidr": "<<Internal DB>>", 
+                "cidr": "<<Internal_DB>>", 
                 "destination": "<<External_Subnet>>"
             }
         ]
@@ -134,7 +134,7 @@
         ]
     }, 
     {
-        "Name": "Internal DB", 
+        "Name": "Internal_DB", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -201,7 +201,7 @@
         ]
     }, 
     {
-        "Name": "Checkpoint Web Private", 
+        "Name": "Checkpoint_Web_Private", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -220,7 +220,7 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<Checkpoint Web Public>>", 
+                "cidr": "<<Checkpoint_Web_Public>>", 
                 "destination": "<<External_Subnet>>"
             }, 
             {
@@ -234,7 +234,7 @@
         ]
     }, 
     {
-        "Name": "Management Servers", 
+        "Name": "Management_Servers", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
