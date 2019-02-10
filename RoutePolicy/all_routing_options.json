@@ -1,10 +1,10 @@
 [
     {
-        "Name": "Checkpoint_Web_Public", 
+        "Name": "Internet_Transit", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
-                "destination": "Checkpoint_Web_Public"
+                "destination": "Internet_Transit"
             }, 
             {
                 "cidr": "10.0.0.0/8", 
@@ -201,7 +201,7 @@
         ]
     }, 
     {
-        "Name": "Checkpoint_Web_Private", 
+        "Name": "CP_SRX_Transit", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -220,7 +220,7 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<Checkpoint_Web_Public>>", 
+                "cidr": "<<Internet_Transit>>", 
                 "destination": "<<External_Subnet>>"
             }, 
             {
@@ -234,7 +234,7 @@
         ]
     }, 
     {
-        "Name": "Management_Servers", 
+        "Name": "Management_Network", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -255,7 +255,7 @@
         ]
     }, 
     {
-        "Name": "CSRV", 
+        "Name": "CSR_Transit", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -274,17 +274,17 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<PC01>>", 
+                "cidr": "<<Web_App>>", 
                 "destination": "<<External_Subnet>>"
             }, 
             {
-                "cidr": "<<SRV01>>", 
+                "cidr": "<<Dev>>", 
                 "destination": "<<External_Subnet>>"
             }
         ]
     }, 
     {
-        "Name": "ASAv", 
+        "Name": "Web_Dev_Transit", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -303,11 +303,11 @@
                 "destination": "VnetLocal"
             }, 
             {
-                "cidr": "<<PC01>>", 
+                "cidr": "<<Web_App>>", 
                 "destination": "<<External_Subnet>>"
             }, 
             {
-                "cidr": "<<SRV01>>", 
+                "cidr": "<<Dev>>", 
                 "destination": "<<External_Subnet>>"
             }
         ]
@@ -338,7 +338,7 @@
         ]
     }, 
     {
-        "Name": "PC01", 
+        "Name": "Web_App", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
@@ -359,7 +359,7 @@
         ]
     }, 
     {
-        "Name": "SRV01", 
+        "Name": "Dev", 
         "routes": [
             {
                 "cidr": "0.0.0.0/0", 
