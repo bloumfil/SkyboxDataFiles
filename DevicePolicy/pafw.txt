@@ -1,7 +1,9 @@
-set deviceconfig system ip-address <<__D__pafw__SN__Management_Network__D__>> netmask 255.255.255.240 default-gateway <<__D__corevsrx__SN__Management_Network__D__>> dns-setting servers primary 192.168.90.5 secondary 192.168.90.28 
+set deviceconfig system ip-address <<__D__pafw__SN__Management_Network__D__>> netmask 255.255.255.240 
+set deviceconfig system default-gateway <<__D__corevsrx__SN__Management_Network__D__>> dns-setting servers primary 192.168.90.5 secondary 192.168.90.28 
 set network interface ethernet ethernet1/1 layer3 ip <<__D__pafw__SN__Internal_Transit__D__>>/28
 set network interface ethernet ethernet1/2 layer3 ip <<__D__pafw__SN__Internal_Servers__D__>>/28
 set network virtual-router Virtual_Router routing-table ip static-route Default_Route nexthop ip-address <<__D__corevsrx__SN__Internal_Transit__D__>>
 set network virtual-router Virtual_Router routing-table ip static-route Default_Route metric 1 
 set network virtual-router Virtual_Router routing-table ip static-route Default_Route destination 0.0.0.0/0
-set network virtual-router Virtual_Router interface [ ethernet1/1 ethernet1/2]
+set network virtual-router Virtual_Router interface ethernet1/1
+set network virtual-router Virtual_Router interface ethernet1/2
