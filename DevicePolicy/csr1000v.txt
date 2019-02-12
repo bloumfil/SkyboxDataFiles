@@ -12,3 +12,4 @@ ip ssh version 2
 access-list 1 permit any log
 line vty 0 4
 access-class 1 in
+exit
