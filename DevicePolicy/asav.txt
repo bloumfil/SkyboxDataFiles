@@ -2,66 +2,60 @@ interface Management0/0
 nameif management
 security-level 0
 ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
-
 interface GigabitEthernet0/0
 nameif Internal
 security-level 100
 ip address <<__D__asav__SN__CSR_Transit__D__>> 255.255.255.240 
-
 interface GigabitEthernet0/1
 nameif External
 security-level 0
 ip address <<__D__asav__SN__Web_Dev_Transit__D__>> 255.255.255.240
-
 dns server-group DefaultDNS
 name-server 192.168.90.5 
 name-server 192.168.90.28
-
-
 object network All_<<__SN__SandboxWide__SN__>>
- subnet <<__SN__SandboxWide__SN__>> 255.255.255.0
+subnet <<__SN__SandboxWide__SN__>> 255.255.255.0
 object network CSR_Transit
- subnet <<__SN__CSR_Transit__SN__>> 255.255.255.240
+subnet <<__SN__CSR_Transit__SN__>> 255.255.255.240
 object network DMZ_Server_Farm
- subnet <<__SN__DMZ_Server_Farm__SN__>> 255.255.255.240
+subnet <<__SN__DMZ_Server_Farm__SN__>> 255.255.255.240
 object network Web_App
- subnet <<__SN__Web_App__SN__>> 255.255.255.240
+subnet <<__SN__Web_App__SN__>> 255.255.255.240
 object network Internal_DB
- subnet <<__SN__Internal_DB__SN__>> 255.255.255.240
+subnet <<__SN__Internal_DB__SN__>> 255.255.255.240
 object network Dev
- subnet <<__SN__Dev__SN__>> 255.255.255.240
+subnet <<__SN__Dev__SN__>> 255.255.255.240
 object network App_Developers
- subnet <<__SN__App_Developers__SN__>> 255.255.255.240
+subnet <<__SN__App_Developers__SN__>> 255.255.255.240
 object-group service Service_22_TCP
- service-object tcp destination eq ssh 
+service-object tcp destination eq ssh 
 object-group service HTTP
- service-object tcp destination eq www 
+service-object tcp destination eq www 
 object-group service HTTPS
- service-object tcp destination eq https 
+service-object tcp destination eq https 
 object-group service MYSQL
- service-object tcp destination eq 3306 
+service-object tcp destination eq 3306 
 object-group service App_DB_Services
- group-object HTTP
- group-object HTTPS
- group-object MYSQL
+group-object HTTP
+group-object HTTPS
+group-object MYSQL
 object-group service ICMP_Any
- service-object icmp 
+service-object icmp 
 object-group service SSH
- service-object tcp destination eq ssh 
+service-object tcp destination eq ssh 
 object-group service OG_S_ICMP_SSH
- group-object ICMP_Any
- group-object SSH
+group-object ICMP_Any
+group-object SSH
 object-group network sbsrv
- network-object host <<__D__SBSRV-9.0.703__SN__Management_Network__D__>>
+network-object host <<__D__SBSRV-9.0.703__SN__Management_Network__D__>>
 object-group network CSR1000
- network-object host <<__D__csr1000v__SN__CSR_Transit__D__>>
+network-object host <<__D__csr1000v__SN__CSR_Transit__D__>>
 object-group service Service_80_TCP
- service-object tcp destination eq www 
+service-object tcp destination eq www 
 object-group service Service_443_TCP
- service-object tcp destination eq https 
+service-object tcp destination eq https 
 object-group service Service_3306_TCP
- service-object tcp destination eq 3306
-
+service-object tcp destination eq 3306
 access-list ALLOW_ALL extended permit ip any any 
 access-list External_In extended permit ip object DMZ_Server_Farm object Web_App 
 access-list External_In extended permit object-group OG_S_ICMP_SSH object-group sbsrv object-group CSR1000 
@@ -74,22 +68,17 @@ mtu External 1500
 access-group DENY_ALL out interface management
 access-group INSIDE-IN in interface Internal
 access-group External_In in interface External
-
 route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 route management <<__SN__Clients__SN__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__SN__Web_App__SN__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route Internal <<__SN__Dev__SN__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management 192.168.120.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
-
 ssh 0.0.0.0 0.0.0.0 External
-
 class-map tcp_bypass
 description "TCP traffic bypassing stateful inspection"
 match access-list ALLOW_ALL
-
 policy-map tcp_bypass_policy
 class tcp_bypass
 set connection advanced-options tcp-state-bypass
-
 no call-home reporting anonymous
