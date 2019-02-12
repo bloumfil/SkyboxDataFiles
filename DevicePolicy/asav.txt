@@ -1,7 +1,3 @@
-interface Management0/0
-nameif management
-security-level 0
-ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
 interface GigabitEthernet0/0
 nameif Internal
 security-level 100
@@ -82,3 +78,7 @@ policy-map tcp_bypass_policy
 class tcp_bypass
 set connection advanced-options tcp-state-bypass
 no call-home reporting anonymous
+interface Management0/0
+nameif management
+security-level 0
+ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
