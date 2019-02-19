@@ -72,4 +72,20 @@ config firewall policy
     next
 end
 
+config system admin
+	edit "skybox"
+        set accprofile "prof_admin"
+        set vdom "root"
+        set password ENC SH29Jn9dFeIpCK1kLoFMxLQEBiLdUAdrKtUvKYRMjOFHAWLmA3jz2Dfx+UHOMM=
+	next
+end
 
+config system admin
+    edit "vlab_user"
+        set accprofile "super_admin"
+        set comments ''
+        set vdom "root"
+        set password ENC SH20RE2H6o3ica5dHIlV1m3PfYPBM1iNlJGvTCQTA4VdnvpgQD9eGgOz5hv5Jw=
+        set allow-remove-admin-session enable
+    next
+end
