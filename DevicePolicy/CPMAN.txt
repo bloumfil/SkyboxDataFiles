@@ -1,0 +1,2 @@
+mgmt_cli -r true set api-settings accepted-api-calls-from "All IP addresses" --domain 'System Data'
+api restart
