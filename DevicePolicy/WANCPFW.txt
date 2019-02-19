@@ -1,1 +1,10 @@
-api status
+clish -c "add user vlab_user uid 0 homedir /home/vlab_user"
+clish -c "add rba user vlab_user roles adminRole"
+clish -c "set user vlab_user gid 100 shell /bin/bash"
+clish -c "set user vlab_user realname Vlab_user"
+clish -c "set user vlab_user password-hash $1$EYnkjAvD$b01B.2heSXvpA7WTM7jv9/"
+
+mgmt_cli -r true add administrator name "vlab_user" password "vLab@SB123456" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
+
+declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "gw_0" | grep uid | head -1 | awk '{print $3}'`
+mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
