@@ -288,6 +288,10 @@
             {
                 "cidr": "<<Dev>>", 
                 "destination": "<<External_Subnet>>"
+            },
+            {
+                "cidr": "<<CSR_Transit>>", 
+                "destination": "<<External_Subnet>>"
             }
         ]
     }, 
