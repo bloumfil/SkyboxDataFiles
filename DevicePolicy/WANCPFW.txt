@@ -6,5 +6,5 @@ clish -c "set user vlab_user password-hash $1$EYnkjAvD$b01B.2heSXvpA7WTM7jv9/"
 
 mgmt_cli -r true add administrator name "vlab_user" password "vLab@SB123456" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
 
-declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "gw_0" | grep uid | head -1 | awk '{print $3}'`
+declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "cp-gatewayns-6414c461" | grep uid | head -1 | awk '{print $3}'`
 mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
