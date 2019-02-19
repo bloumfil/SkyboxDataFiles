@@ -3,3 +3,4 @@ show
 set primary 192.168.90.5
 set secondary 192.168.90.28
 show
+end
