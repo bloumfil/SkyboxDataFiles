@@ -13,7 +13,7 @@ api restart
 declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "cp-gatewayns-6414c461" | grep uid | head -1 | awk '{print $3}'`
 mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
 
-clish -c "set static-route default nexthop gateway address <<__D__corevsrx__SN__Management_Network__D__>> on"
 declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | sed 's/on/off/'
+clish -c "set static-route default nexthop gateway address <<__D__corevsrx__SN__Management_Network__D__>> on"
 clish -c "$GW_DGW"
 clish -c "save config"
