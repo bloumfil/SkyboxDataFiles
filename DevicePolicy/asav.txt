@@ -49,7 +49,7 @@ object-group service OG_S_ICMP_SSH
 group-object ICMP_Any
 group-object SSH
 object-group network sbsrv
-network-object host <<__D__SBSRV-9.0.703__SN__Management_Network__D__>>
+network-object host <<__D__SBSRV__SN__Management_Network__D__>>
 object-group network CSR1000
 network-object host <<__D__csr1000v__SN__CSR_Transit__D__>>
 object-group service Service_80_TCP
@@ -59,7 +59,7 @@ service-object tcp destination eq https
 object-group service Service_3306_TCP
 service-object tcp destination eq 3306
 object-group network sbvsrv
- network-object host <<__D__SBSRV-9.0.703__SN__Management_Network__D__>>
+ network-object host <<__D__SBSRV__SN__Management_Network__D__>>
 object-group service Service_8443_TCP
  service-object tcp destination eq 8443 
 object-group service Service_9443_TCP
@@ -80,7 +80,7 @@ logging enable
 logging timestamp rfc5424
 logging monitor informational
 logging device-id hostname
-logging host management <<__D__SBSRV-9.0.703__SN__Management_Network__D__>> 6/5514
+logging host management <<__D__SBSRV__SN__Management_Network__D__>> 6/5514
 logging permit-hostdown
 mtu management 1500
 mtu Internal 1500
@@ -161,6 +161,7 @@ class tcp_bypass
 set connection advanced-options tcp-state-bypass
 prompt hostname context
 no call-home reporting anonymous
+no service-policy global_policy global
 interface Management0/0
 description Management_Network
 management-only
