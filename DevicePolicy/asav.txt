@@ -1,8 +1,12 @@
 interface GigabitEthernet0/0
+no shutdown
+description CSR_Transit
 nameif Internal
 security-level 100
 ip address <<__D__asav__SN__CSR_Transit__D__>> 255.255.255.240 
 interface GigabitEthernet0/1
+no shutdown
+description Web_Dev_Transit
 nameif External
 security-level 0
 ip address <<__D__asav__SN__Web_Dev_Transit__D__>> 255.255.255.240
@@ -36,7 +40,9 @@ group-object HTTP
 group-object HTTPS
 group-object MYSQL
 object-group service ICMP_Any
-service-object icmp 
+service-object icmp
+service-object icmp echo
+service-object icmp echo-reply
 object-group service SSH
 service-object tcp destination eq ssh 
 object-group service OG_S_ICMP_SSH
@@ -52,18 +58,40 @@ object-group service Service_443_TCP
 service-object tcp destination eq https 
 object-group service Service_3306_TCP
 service-object tcp destination eq 3306
+object-group network sbvsrv
+ network-object host <<__D__SBSRV-9.0.703__SN__Management_Network__D__>>
+object-group service Service_8443_TCP
+ service-object tcp destination eq 8443 
+object-group service Service_9443_TCP
+ service-object tcp destination eq 9443 
+object-group service Development_Services
+ group-object Service_22_TCP
+ group-object HTTPS
+ group-object Service_80_TCP
+ group-object Service_8443_TCP
+ group-object Service_9443_TCP
 access-list ALLOW_ALL extended permit ip any any 
-access-list External_In extended permit ip object DMZ_Server_Farm object Web_App 
-access-list External_In extended permit object-group OG_S_ICMP_SSH object-group sbsrv object-group CSR1000 
-access-list External_In extended permit ip object App_Developers object Dev 
-access-list DENY_ALL extended deny ip any any 
-access-list INSIDE-IN extended permit object-group App_DB_Services object Web_App object Internal_DB
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group sbsrv object-group CSR1000 log 
+access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev 
+access-list EXTERNAL_IN extended deny ip any any 
+access-list INTERNAL_IN extended permit icmp any any echo-reply log 
+access-list INTERNAL_IN extended deny ip any any
 logging enable
+logging timestamp rfc5424
+logging monitor informational
+logging device-id hostname
+logging host management <<__D__SBSRV-9.0.703__SN__Management_Network__D__>> 6/5514
+logging permit-hostdown
+mtu management 1500
 mtu Internal 1500
 mtu External 1500
-access-group DENY_ALL out interface management
-access-group INSIDE-IN in interface Internal
-access-group External_In in interface External
+no failover
+icmp unreachable rate-limit 1 burst-size 1
+no asdm history enable
+arp timeout 14400
+arp rate-limit 16384
+access-group INTERNAL_IN in interface Internal
+access-group EXTERNAL_IN in interface External
 route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
@@ -71,16 +99,71 @@ route management 192.168.120.21 255.255.255.255 <<__D__corevsrx__SN__Management_
 route management 192.168.190.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.120.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+timeout conn-holddown 0:00:15
+timeout igp stale-route 0:01:10
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL 
+aaa authentication login-history
+http server enable
+http 10.0.0.0 255.0.0.0 management
+no snmp-server location
+no snmp-server contact
+ssh stricthostkeycheck
+ssh 0.0.0.0 0.0.0.0 management
 ssh 0.0.0.0 0.0.0.0 External
+ssh timeout 60
+ssh version 2
+ssh key-exchange group dh-group1-sha1
+console timeout 0
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+dynamic-access-policy-record DfltAccessPolicy
+class-map inspection_default
+match default-inspection-traffic
 class-map tcp_bypass
 description "TCP traffic bypassing stateful inspection"
 match access-list ALLOW_ALL
+policy-map type inspect dns preset_dns_map
+parameters
+message-length maximum client auto
+message-length maximum 512
+no tcp-inspection
+policy-map global_policy
+class inspection_default
+inspect dns preset_dns_map 
+inspect ftp 
+inspect h323 h225 
+inspect h323 ras 
+inspect rsh 
+inspect rtsp 
+inspect esmtp 
+inspect sqlnet 
+inspect skinny  
+inspect sunrpc 
+inspect xdmcp 
+inspect sip  
+inspect netbios 
+inspect tftp 
+inspect ip-options
 policy-map tcp_bypass_policy
 class tcp_bypass
 set connection advanced-options tcp-state-bypass
+prompt hostname context
 no call-home reporting anonymous
 interface Management0/0
+description Management_Network
+management-only
 nameif management
 ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
 security-level 0
