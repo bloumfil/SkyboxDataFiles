@@ -4,7 +4,7 @@ clish -c "set user vlab_user gid 100 shell /bin/bash"
 clish -c "set user vlab_user realname Vlab_user"
 clish -c "set user vlab_user password-hash $1$EYnkjAvD$b01B.2heSXvpA7WTM7jv9/"
 clish -c "save config"
-clish -c "set static-route default nexthop gateway address <<__NA1__Internet_Transit__NA1__>> on"
 declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | sed 's/on/off/'
+clish -c "set static-route default nexthop gateway address <<__NA1__Internet_Transit__NA1__>> on"
 clish -c "$GW_DGW"
 clish -c "save config"
