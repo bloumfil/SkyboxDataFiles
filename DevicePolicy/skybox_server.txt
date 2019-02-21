@@ -1,2 +1,1 @@
-ifconfig
-ping 8.8.8.8
+ip route change default via <<__D__corevsrx__SN__Management_Network__D__>>
