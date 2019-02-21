@@ -10,9 +10,9 @@ dns server-group DefaultDNS
 name-server 192.168.90.5 
 name-server 192.168.90.28
 object network All_<<__NA__SandboxWide__NA__>>
-subnet <<__NA__SandboxWide__NA____>> 255.255.255.0
+subnet <<__NA__SandboxWide__NA__>> 255.255.255.0
 object network CSR_Transit
-subnet <<__NA__CSR_Transit__SA__>> 255.255.255.240
+subnet <<__NA__CSR_Transit__NA__>> 255.255.255.240
 object network DMZ_Server_Farm
 subnet <<__NA__DMZ_Server_Farm__NA__>> 255.255.255.240
 object network Web_App
