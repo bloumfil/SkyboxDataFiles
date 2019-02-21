@@ -64,12 +64,14 @@ mtu External 1500
 access-group DENY_ALL out interface management
 access-group INSIDE-IN in interface Internal
 access-group External_In in interface External
-route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 route management <<__SN__Clients__SN__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__SN__Web_App__SN__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route Internal <<__SN__Dev__SN__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management 192.168.120.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.120.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 ssh 0.0.0.0 0.0.0.0 External
 class-map tcp_bypass
 description "TCP traffic bypassing stateful inspection"
