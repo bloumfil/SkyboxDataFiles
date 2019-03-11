@@ -21,3 +21,15 @@ mgmt_cli -r true add administrator name "vlab_user" password "vLab@SB123456" mus
 mgmt_cli -r true add administrator name "skyboxview" password "skyboxview" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
 mgmt_cli -r true set api-settings accepted-api-calls-from "All IP addresses" --domain 'System Data'
 api restart
+mgmt_cli -r true add host name "NAT_Address_1" ip-address "<<__DX__wancpfw__SN__Internet_Transit__PV__1__DX__>>"
+mgmt_cli -r true add host name "NAT_Address_2" ip-address "<<__DX__wancpfw__SN__Internet_Transit__PV__2__DX__>>"
+mgmt_cli -r true add host name "F5_NAT_Address_1" ip-address "<<__DX__f5loadbalancer__SN__DMZ__PV__0__DX__>>"
+mgmt_cli -r true add host name "F5_NAT_Address_2" ip-address "<<__DX__f5loadbalancer__SN__DMZ__PV__1__DX__>>"
+mgmt_cli -r true add host name "Team_IP_Alastair" ip-address "185.125.226.2"
+mgmt_cli -r true add host name "Team_IP_DaveW" ip-address "47.155.18.176"
+mgmt_cli -r true add host name "Team_IP_JerryG" ip-address "23.121.32.184"
+mgmt_cli -r true add host name "Team_IP_SB_Office" ip-address "12.133.139.90"
+mgmt_cli -r true add network name "Internal_Networks" subnet "<<__NA__SandboxWide__NA__>>" subnet-mask "255.255.255.0"
+mgmt_cli -r true add group name "Team_Sources_SB" members.1 "Team_IP_Alastair" members.2 "Team_IP_DaveW" members.3 "Team_IP_JerryG" members.4 "Team_IP_SB_Office"
+mgmt_cli -r true add service-group name "Web_Services" members.1 "http" members.2 "https"
+mgmt_cli -r true add service-tcp name "Skybox_Server_Service" port "8443"

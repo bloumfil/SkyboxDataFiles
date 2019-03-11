@@ -14,3 +14,5 @@ declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | s
 clish -c "set static-route default nexthop gateway address <<__NX1__Internet_Transit__NX1__>> on"
 clish -c "$GW_DGW"
 clish -c "save config"
+clish -c "set interface eth2 ipv4-address <<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> mask-length 28"
+clish -c "save config"
