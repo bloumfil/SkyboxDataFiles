@@ -33,7 +33,7 @@ mgmt_cli -r true add access-rule layer "Network" position 2 service.1 "Skybox_Se
 mgmt_cli -r true add access-rule layer "Network" position 3 service "Web_Services" source "Any" destination "NAT_Address_1" action "Accept" track "Log" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add access-rule layer "Network" position 4 service "Web_Services" source "Any" destination "NAT_Address_2" action "Accept" track "Log" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add access-rule layer "Network" position 5 service "Any" source.1 "App_Developers" source.2 "Clients" destination "Internal_Servers" action "Accept" track "Log"
-mgmt_cli -r true add access-rule layer "Network" position 6 service.1 "https" service.2 "ssh_version_2" source "sbsrv" destination "f5loadbalancer" action "Accept" track "Log"
+mgmt_cli -r true add access-rule layer "Network" position 6 service.1 "https" service.2 "ssh_version_2" source "sbsrv_in_Management_Network" destination "f5loadbalancer_in_DMZ" action "Accept" track "Log"
 mgmt_cli -r true add access-rule layer "Network" position 7 service "Any" source.1 "F5_NAT_Address_1" source.2 "F5_NAT_Address_2" destination "Web_App" action "Accept" track "Log"
 mgmt_cli -r true add access-rule layer "Network" position 8 service "Any" source "Internal_Networks" destination "Internal_Networks" destination-negate true action "Accept" track "None" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add access-rule layer "Network" position 9 service "Any" source "DMZ_Server_Farm" destination "Web_App" action "Accept" track "Log"
