@@ -29,4 +29,4 @@ mgmt_cli -r true add network name "Internal_Networks" subnet "<<__NA__SandboxWid
 mgmt_cli -r true add group name "Team_Sources_SB" members.1 "Team_IP_Alastair" members.2 "Team_IP_DaveW" members.3 "Team_IP_JerryG" members.4 "Team_IP_SB_Office"
 mgmt_cli -r true add service-group name "Web_Services" members.1 "http" members.2 "https"
 mgmt_cli -r true add service-tcp name "Skybox_Server_Service" port "8443"
-mgmt_cli -r true add access-rule layer "Network" position 2 service.1 "Skybox_Server_Service" service.2 "ssh" vpn "Any" source "Team_Sources_SB" destination.1 "NAT_Address_1" destination.2 "NAT_Address_2" action "Accept" track "Log" install-on "<<__DS__wancpfw__DS__>>"
+mgmt_cli -r true add access-rule layer "Network" position 2 service.1 "Skybox_Server_Service" service.2 "ssh" vpn "Any" source "Team_Sources_SB" destination.1 "NAT_Address_1" destination.2 "NAT_Address_2" action "Accept" track "Log" install-on "<<__DG__wancpfw__DG__>>"
