@@ -30,3 +30,4 @@ mgmt_cli -r true add group name "Team_Sources_SB" members.1 "Team_IP_Alastair" m
 mgmt_cli -r true add service-group name "Web_Services" members.1 "http" members.2 "https"
 mgmt_cli -r true add service-tcp name "Skybox_Server_Service" port "8443"
 mgmt_cli -r true add access-rule layer "Network" position 2 service.1 "Skybox_Server_Service" service.2 "ssh" vpn "Any" source "Team_Sources_SB" destination.1 "NAT_Address_1" destination.2 "NAT_Address_2" action "Accept" track "Log" install-on "<<__DG__wancpfw__DG__>>"
+mgmt_cli -r true add access-rule layer "Network" position 3 service "Web_Services" source "Any" destination "Any" action "Accept" track "Log" install-on "<<__DG__wancpfw__DG__>>"
