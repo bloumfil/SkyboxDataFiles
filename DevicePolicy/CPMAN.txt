@@ -14,7 +14,7 @@ declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | s
 clish -c "set static-route default nexthop gateway address <<__D__corevsrx__SN__Management_Network__D__>> on"
 clish -c "$GW_DGW"
 clish -c "save config"
-declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "<<__DS__wancpfw__DS__>>" | grep uid | head -1 | awk '{print $3}'`
+declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "<<__DG__wancpfw__DG__>>" | grep uid | head -1 | awk '{print $3}'`
 mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
 mgmt_cli -r true add opsec-application name "Skybox" host "sbsrv" cpmi.enabled "true" cpmi.use-administrator-credentials "true" lea.enabled "true" one-time-password "skyboxview"
 mgmt_cli -r true add administrator name "vlab_user" password "vLab@SB123456" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
