@@ -1,3 +1,4 @@
+terminal width 511
 interface GigabitEthernet0/0
 no shutdown
 description CSR_Transit
@@ -58,8 +59,19 @@ object-group service Service_443_TCP
 service-object tcp destination eq https 
 object-group service Service_3306_TCP
 service-object tcp destination eq 3306
+object network Web_App_CentOS7
+ host <<__D__apache-web1__SN__Web_App__D__>>
+object network Host_sbsrv
+ host <<__D__sbsrv__SN__Management_Network__D__>>
+object network CSR1000v
+ host <<__D__csr1000v__SN__CSR_Transit__D__>>
 object-group network sbvsrv
  network-object host <<__D__SBSRV__SN__Management_Network__D__>>
+object-group network Group_sbsrvers
+ network-object object Host_sbsrv
+object-group network DM_INLINE_NETWORK_1
+ network-object object Dev
+ network-object object Web_App
 object-group service Service_8443_TCP
  service-object tcp destination eq 8443 
 object-group service Service_9443_TCP
@@ -70,17 +82,23 @@ object-group service Development_Services
  group-object Service_80_TCP
  group-object Service_8443_TCP
  group-object Service_9443_TCP
+access-list alert-interval 10
 access-list ALLOW_ALL extended permit ip any any 
-access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group sbsrv object-group CSR1000 log 
-access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev 
-access-list EXTERNAL_IN extended deny ip any any 
-access-list INTERNAL_IN extended permit icmp any any echo-reply log 
-access-list INTERNAL_IN extended deny ip any any
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
+access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object-group DM_INLINE_NETWORK_1 log
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
+access-list EXTERNAL_IN extended deny ip any any log disable
+access-list Internal_cryptomap extended permit ip interface External 192.0.0.0 255.0.0.0
 logging enable
-logging timestamp rfc5424
+logging timestamp
+no logging hide username
+logging list ACE_LOG message 106100
 logging monitor informational
-logging device-id hostname
-logging host management <<__D__SBSRV__SN__Management_Network__D__>> 6/5514
+logging trap informational
+logging asdm informational
+logging facility 22
+logging device-id ipaddress External
+logging host External <<__D__SBSRV__SN__Management_Network__D__>>
 logging permit-hostdown
 mtu management 1500
 mtu Internal 1500
@@ -90,16 +108,15 @@ icmp unreachable rate-limit 1 burst-size 1
 no asdm history enable
 arp timeout 14400
 arp rate-limit 16384
-access-group INTERNAL_IN in interface Internal
 access-group EXTERNAL_IN in interface External
 route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
+route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Web_Dev_Transit__D__>>
 route management 192.168.120.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.120.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 timeout xlate 3:00:00
 timeout pat-xlate 0:00:30
@@ -111,6 +128,45 @@ timeout tcp-proxy-reassembly 0:01:00
 timeout floating-conn 0:00:00
 timeout conn-holddown 0:00:15
 timeout igp stale-route 0:01:10
+crypto ipsec ikev2 ipsec-proposal aaa
+ protocol esp encryption aes-gcm-256
+ protocol esp integrity sha-512
+crypto ipsec security-association pmtu-aging infinite
+crypto map Internal_map0 1 match address Internal_cryptomap
+crypto map Internal_map0 1 set peer 192.168.14.14
+crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
+crypto map Internal_map0 interface Internal
+crypto ikev2 policy 1
+ encryption aes-256
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 10
+ encryption aes-192
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 20
+ encryption aes
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 30
+ encryption 3des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 40
+ encryption des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 enable Internal
 user-identity default-domain LOCAL
 aaa authentication ssh console LOCAL 
 aaa authentication login-history
@@ -124,6 +180,15 @@ ssh 0.0.0.0 0.0.0.0 External
 ssh timeout 60
 ssh version 2
 ssh key-exchange group dh-group1-sha1
+group-policy GroupPolicy1 internal
+group-policy GroupPolicy1 attributes
+ vpn-tunnel-protocol ikev2
+tunnel-group 192.168.14.14 type ipsec-l2l
+tunnel-group 192.168.14.14 general-attributes
+ default-group-policy GroupPolicy1
+tunnel-group 192.168.14.14 ipsec-attributes
+ ikev2 remote-authentication pre-shared-key skyboxview
+ ikev2 local-authentication pre-shared-key skyboxview
 console timeout 0
 threat-detection basic-threat
 threat-detection statistics access-list
