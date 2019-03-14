@@ -11,9 +11,6 @@ description Web_Dev_Transit
 nameif External
 security-level 0
 ip address <<__D__asav__SN__Web_Dev_Transit__D__>> 255.255.255.240
-dns server-group DefaultDNS
-name-server 192.168.90.5 
-name-server 192.168.90.29
 object network All_<<__NA__SandboxWide__NA__>>
 subnet <<__NA__SandboxWide__NA__>> 255.255.255.0
 object network CSR_Transit
@@ -91,8 +88,6 @@ no asdm history enable
 arp timeout 14400
 arp rate-limit 16384
 access-group EXTERNAL_IN in interface External
-route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Web_Dev_Transit__D__>>
-route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
