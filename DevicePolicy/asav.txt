@@ -91,15 +91,15 @@ no asdm history enable
 arp timeout 14400
 arp rate-limit 16384
 access-group EXTERNAL_IN in interface External
+route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Web_Dev_Transit__D__>>
 route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
 route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
-route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Web_Dev_Transit__D__>>
-route management 192.168.120.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.190.21 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.120.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.190.22 255.255.255.255 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
 timeout xlate 3:00:00
 timeout pat-xlate 0:00:30
 timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
