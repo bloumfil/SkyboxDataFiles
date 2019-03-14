@@ -60,6 +60,8 @@ object-group service Service_443_TCP
 service-object tcp destination eq https 
 object-group service Service_3306_TCP
 service-object tcp destination eq 3306
+object-group service Service_8443_TCP
+service-object tcp destination eq 8443
 object-group service Service_9443_TCP
 service-object tcp destination eq 9443
 object-group service Development_Services
@@ -70,7 +72,7 @@ group-object Service_8443_TCP
 group-object Service_9443_TCP
 access-list ALLOW_ALL extended permit ip any any 
 access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
-access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers Dev
+access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev
 access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
 access-list EXTERNAL_IN extended deny ip any any
 pager lines 23
