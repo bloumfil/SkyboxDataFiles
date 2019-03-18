@@ -1,5 +1,21 @@
 ip route change default via <<__D__corevsrx__SN__Management_Network__D__>>
 touch /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__0__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__1__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__1__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__2__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__2__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__0__DX__>>" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__1__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__1__DX__>>" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__2__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__2__DX__>>" >> /home/skyboxview/internet_mapping.txt
+touch /home/skyboxview/network_subnets.txt
+<<__SN__App_DB_Transit__SN__>> App_DB_Transit
+<<__SN__App_Developers__SN__>> App_Developers
+<<__SN__Clients__SN__>> Clients
+<<__SN__CP_SRX_Transit__SN__>> CP_SRX_Transit
+<<__SN__CSR_Transit__SN__>> CSR_Transit
+<<__SN__Dev__SN__>> Dev
+<<__SN__DMZ__SN__>> DMZ
+<<__SN__DMZ_Server_Farm__SN__>> DMZ_Server_Farm
+<<__SN__Internal_DB__SN__>> Internal_DB
+<<__SN__Internal_Servers__SN__>> Internal_Servers
+<<__SN__Internal_Transit__SN__>> Internal_Transit
+<<__SN__Internet_Transit__SN__>> Internet_Transit
+<<__SN__Management_Network__SN__>> Management_Network
+<<__SN__Web_App__SN__>> Web_App
+<<__SN__Web_Dev_Transit_RouteTable__SN__>> Web_Dev_Transit_RouteTable
