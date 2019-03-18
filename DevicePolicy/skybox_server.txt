@@ -1,5 +1,5 @@
 ip route change default via <<__D__corevsrx__SN__Management_Network__D__>>
 touch /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> <<__DX__wancpfw__SN__Internet_Transit__PB__0__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__1__DX__>> <<__DX__wancpfw__SN__Internet_Transit__PB__1__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
-echo "<<__DX__wancpfw__SN__Internet_Transit__PV__2__DX__>> <<__DX__wancpfw__SN__Internet_Transit__PB__2__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__0__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__1__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__1__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
+echo "<<__DX__wancpfw__SN__Internet_Transit__PV__2__DX__>> - <<__DX__wancpfw__SN__Internet_Transit__PB__2__DX__>>\n" >> /home/skyboxview/internet_mapping.txt
