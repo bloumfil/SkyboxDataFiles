@@ -18,7 +18,6 @@ echo "<<__SN__Internal_Transit__SN__>> Internal_Transit" >> /home/skyboxview/net
 echo "<<__SN__Internet_Transit__SN__>> Internet_Transit" >> /home/skyboxview/network_subnets.txt
 echo "<<__SN__Management_Network__SN__>> Management_Network" >> /home/skyboxview/network_subnets.txt
 echo "<<__SN__Web_App__SN__>> Web_App" >> /home/skyboxview/network_subnets.txt
-echo "<<__SN__Web_Dev_Transit_RouteTable__SN__>> Web_Dev_Transit_RouteTable" >> /home/skyboxview/network_subnets.txt
+echo "<<__SN__Web_Dev_Transit__SN__>> Web_Dev_Transit" >> /home/skyboxview/network_subnets.txt
 touch /home/skyboxview/PaloAlto_Device_Group.txt
 echo "<<__PA__DEVICE_GROUP__PA__>>" >> /home/skyboxview/PaloAlto_Device_Group.txt
-
