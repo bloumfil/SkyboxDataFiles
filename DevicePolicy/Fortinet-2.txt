@@ -1,0 +1,91 @@
+config system dns
+	set primary 192.168.90.5
+	set secondary 192.168.90.28
+end
+
+config firewall policy
+    edit 100
+        set name "Deny All DB to Core"
+        set srcintf "port2" 
+        set dstintf "port1"	
+        set srcaddr "all"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+        set logtraffic disable
+        set fsso disable
+    next
+    edit 103
+        set name "Web_App to Internal_DB"
+        set srcintf "port1" 
+        set dstintf "port2" 
+        set srcaddr "Web_App"
+        set dstaddr "Internal_DB"
+        set action accept
+        set schedule "always"
+        set service "HTTP" "HTTPS" "MYSQL"
+        set fsso disable
+    next
+    edit 5
+        set name "Deny All DB to App Dev"
+        set srcintf "port2" 
+        set dstintf "port3" 
+        set srcaddr "all"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+        set logtraffic disable
+        set fsso disable
+    next
+    edit 6
+        set name "App_Dev to Dev"
+        set srcintf "port3" 
+        set dstintf "port1" 
+        set srcaddr "App_Developers"
+        set dstaddr "Dev"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set fsso disable
+    next
+    edit 7
+        set name "App_Dev Restricted Ports"
+        set srcintf "port3" 
+        set dstintf "port1"
+        set srcaddr "App_Developers"
+        set dstaddr "Dev"
+        set action accept
+        set schedule "always"
+        set service "FTP" "HTTP" "HTTPS" "IMAPS" "MS-SQL" "MYSQL" "PING" "RADIUS" "RDP" "SAMBA" "SMB" "SSH" "SYSLOG" "TELNET" "TFTP" "TRACEROUTE" "VNC" "WINS"
+        set fsso disable
+    next
+    edit 4
+        set name "Deny All App_Dev to Core"
+        set srcintf "port3" 
+        set dstintf "port1" 
+        set srcaddr "all"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+        set logtraffic disable
+        set fsso disable
+    next
+end
+
+config system admin
+	edit "skybox"
+        set accprofile "prof_admin"
+        set vdom "root"
+        set password ENC SH29Jn9dFeIpCK1kLoFMxLQEBiLdUAdrKtUvKYRMjOFHAWLmA3jz2Dfx+UHOMM=
+	next
+end
+
+config system admin
+    edit "vlab_user"
+        set accprofile "super_admin"
+        set comments ''
+        set vdom "root"
+        set password ENC SH20RE2H6o3ica5dHIlV1m3PfYPBM1iNlJGvTCQTA4VdnvpgQD9eGgOz5hv5Jw=
+        set allow-remove-admin-session enable
+    next
+end
