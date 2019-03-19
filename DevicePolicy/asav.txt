@@ -112,6 +112,45 @@ http server enable
 http 10.0.0.0 255.0.0.0 management
 no snmp-server location
 no snmp-server contact
+crypto ipsec ikev2 ipsec-proposal aaa
+ protocol esp encryption aes-gcm-256
+ protocol esp integrity sha-512
+crypto ipsec security-association pmtu-aging infinite
+crypto map Internal_map0 1 match address Internal_cryptomap
+crypto map Internal_map0 1 set peer 192.168.14.14 
+crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
+crypto map Internal_map0 interface Internal
+crypto ikev2 policy 1
+ encryption aes-256
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 10
+ encryption aes-192
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 20
+ encryption aes
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 30
+ encryption 3des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 40
+ encryption des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 enable Internal
 telnet timeout 5
 ssh stricthostkeycheck
 ssh 0.0.0.0 0.0.0.0 management
@@ -123,7 +162,17 @@ console timeout 0
 threat-detection basic-threat
 threat-detection statistics access-list
 no threat-detection statistics tcp-intercept
+ntp server 185.40.95.3 source External
+group-policy GroupPolicy1 internal
+group-policy GroupPolicy1 attributes
+ vpn-tunnel-protocol ikev2
 dynamic-access-policy-record DfltAccessPolicy
+tunnel-group 192.168.14.14 type ipsec-l2l
+tunnel-group 192.168.14.14 general-attributes
+ default-group-policy GroupPolicy1
+tunnel-group 192.168.14.14 ipsec-attributes
+ ikev2 remote-authentication pre-shared-key skyboxview
+ ikev2 local-authentication pre-shared-key skyboxview
 class-map inspection_default
 match default-inspection-traffic
 class-map tcp_bypass
