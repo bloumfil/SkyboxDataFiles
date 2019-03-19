@@ -38,6 +38,7 @@ mgmt_cli -r true add access-rule layer "Network" position 7 service "Any" source
 mgmt_cli -r true add access-rule layer "Network" position 8 service "Any" source "Internal_Networks" destination "Internal_Networks" destination-negate true action "Accept" track "None" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add access-rule layer "Network" position 9 service "Any" source "DMZ_Server_Farm" destination "Web_App" action "Accept" track "Log"
 mgmt_cli -r true add access-rule layer "Network" position 10 service "Any" source "Any" destination "Any" action "Drop" track "Log" install-on "<<__DG__wancpfw__DG__>>"
+mgmt_cli -r true delete access-rule layer "Network" rule-number 11
 mgmt_cli -r true add nat-rule package "standard" position 3 original-source "Any" original-destination "NAT_Address_1" original-service "Skybox_Server_Service" translated-source "Original" translated-destination "sbsrv_in_Management_Network" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add nat-rule package "standard" position 4 original-source "Any" original-destination "NAT_Address_1" original-service "ssh" translated-source "Original" translated-destination "sbsrv_in_Management_Network" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add nat-rule package "standard" position 5 original-source "Any" original-destination "NAT_Address_1" original-service "https" translated-source "Original" translated-destination "F5_NAT_Address_1" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
