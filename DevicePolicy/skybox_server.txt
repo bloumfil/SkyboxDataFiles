@@ -66,3 +66,17 @@ echo "<<__D__apacheweb11__SN__DMZ_Server_Farm__D__>> - apacheweb11_in_DMZ_Server
 echo "<<__D__secops_1__SN__Clients__D__>> - secops_1_in_Clients" >> /home/skyboxview/hosts.txt
 echo "<<__D__secops_1__SN__Internet_Transit__D__>> - secops_1_in_Internet_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__apache-web1__SN__Web_App__D__>> - apache-web1_in_Web_App" >> /home/skyboxview/hosts.txt
+echo > /etc/resolv.conf
+echo "search demo.skybox.com" >> /etc/resolv.conf
+echo "nameserver 192.168.90.5" >> /etc/resolv.conf
+echo "nameserver 192.168.90.29" >> /etc/resolv.conf
+echo > /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "DEVICE=eth0" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "ONBOOT=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "BOOTPROTO=static" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "IPADDR=<<__D__sbsrv__SN__Management_Network__D__>>" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "NETMASK=255.255.255.240" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "GATEWAY=<<__D__corevsrx__SN__Management_Network__D__>>" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "TYPE=Ethernet" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "NM_CONTROLLED=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+systemctl restart network
