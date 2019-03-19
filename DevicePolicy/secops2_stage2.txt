@@ -1,0 +1,4 @@
+ipconfig
+ping 8.8.8.8
+route ADD -p <<__NA__SandboxWide__NA__>> MASK 255.255.255.0 <<__D__corevsrx__SN__Clients__D__>>
+route ADD -p 0.0.0.0 MASK 0.0.0.0 <<__D__secops1__SN__Internet_Transit__D__>>
