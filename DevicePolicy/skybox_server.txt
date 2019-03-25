@@ -67,9 +67,14 @@ echo "<<__D__secops_1__SN__Clients__D__>> - secops_1_in_Clients" >> /home/skybox
 echo "<<__D__secops_1__SN__Internet_Transit__D__>> - secops_1_in_Internet_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__apache-web1__SN__Web_App__D__>> - apache-web1_in_Web_App" >> /home/skyboxview/hosts.txt
 echo > /etc/resolv.conf
+echo "# Created by Automation Script" > /etc/resolv.conf
 echo "search demo.skybox.com" >> /etc/resolv.conf
 echo "nameserver 192.168.90.5" >> /etc/resolv.conf
 echo "nameserver 192.168.90.29" >> /etc/resolv.conf
+echo > /etc/hosts
+echo "# Created by Automation Script" > /etc/hosts
+echo "127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 $HOSTNAME" >> /etc/hosts
+echo "::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 $HOSTNAME" >> /etc/hosts
 echo > /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "DEVICE=eth0" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "ONBOOT=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
