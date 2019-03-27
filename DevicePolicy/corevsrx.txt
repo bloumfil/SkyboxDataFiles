@@ -9,3 +9,4 @@ set routing-instances vsrx-vr1 routing-options static route <<__SN__CSR_Transit_
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Internal_DB__SN__>> next-hop <<__D__Fortinet-1__SN__App_DB_Transit__D__>> 
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Web_App__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Dev__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 192.0.0.0/8 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
