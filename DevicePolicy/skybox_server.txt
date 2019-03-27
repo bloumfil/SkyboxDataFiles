@@ -77,6 +77,7 @@ echo "# Created by Automation Script" > /etc/hosts
 echo "127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 $HOSTNAME" >> /etc/hosts
 echo "::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 $HOSTNAME" >> /etc/hosts
 chattr +i /etc/hosts
+ssh-keygen -A
 echo > /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "DEVICE=eth0" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "ONBOOT=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -86,4 +87,4 @@ echo "NETMASK=255.255.255.240" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "GATEWAY=<<__D__corevsrx__SN__Management_Network__D__>>" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "TYPE=Ethernet" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 echo "NM_CONTROLLED=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-systemctl restart network
+init 6
