@@ -43,6 +43,7 @@ mgmt_cli -r true add nat-rule package "standard" position 3 original-source "Any
 mgmt_cli -r true add nat-rule package "standard" position 4 original-source "Any" original-destination "NAT_Address_1" original-service "ssh" translated-source "Original" translated-destination "sbsrv_in_Management_Network" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add nat-rule package "standard" position 5 original-source "Any" original-destination "NAT_Address_1" original-service "https" translated-source "Original" translated-destination "F5_NAT_Address_1" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
 mgmt_cli -r true add nat-rule package "standard" position 6 original-source "Any" original-destination "NAT_Address_2" original-service "https" translated-source "Original" translated-destination "F5_NAT_Address_2" translated-service "Original" install-on "<<__DG__wancpfw__DG__>>"
+mgmt_cli -r true install-policy policy-package "Standard" access true threat-prevention true targets.1 "wancpfw"
 declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | sed 's/on/off/'`
 clish -c "set static-route default nexthop gateway address <<__D__corevsrx__SN__Management_Network__D__>> on"
 clish -c "$GW_DGW"
