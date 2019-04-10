@@ -2,6 +2,10 @@ mv cm device bigip1 f5loadbalancer.demo.skybox.com
 modify sys global-settings hostname f5loadbalancer.demo.skybox.com
 modify sys global-settings gui-setup disabled
 modify sys global-settings mgmt-dhcp disabled
+create net vlan internal { description DMZ_Server_Farm }
+modify net vlan internal interfaces add { 1.1 { } }
+create net vlan external { description DMZ }
+modify net vlan external interfaces add { 1.2 { } }
 modify net interface 1.1 { description DMZ_Server_Farm lldp-tlvmap 114552 }
 modify net interface 1.2 { description DMZ lldp-tlvmap 114552 }
 create net self DMZ_Server_Fram { address <<__D__f5loadbalancer__SN__DMZ_Server_Farm__D__>>/28 allow-service add { default } traffic-group traffic-group-local-only  vlan internal }
