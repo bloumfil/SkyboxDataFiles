@@ -31,6 +31,10 @@ object network Host_sbsrv
 host <<__D__sbsrv__SN__Management_Network__D__>>
 object network CSR1000v
 host <<__D__csr1000v__SN__CSR_Transit__D__>>
+object network NETWORK_OBJ_192.0.0.0_8
+subnet 192.0.0.0 255.0.0.0
+object network NETWORK_OBJ_10.0.0.0_8
+subnet 10.0.0.0 255.0.0.0
 object-group service Service_22_TCP
 service-object tcp destination eq ssh 
 object-group service HTTP
@@ -72,6 +76,8 @@ access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group 
 access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev
 access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
 access-list EXTERNAL_IN extended deny ip any any
+access-list Internal_cryptomap_1 extended permit ip 10.0.0.0 255.0.0.0 192.0.0.0 255.0.0.0
+nat (Internal,Internal) source static NETWORK_OBJ_10.0.0.0_8 NETWORK_OBJ_10.0.0.0_8 destination static NETWORK_OBJ_192.0.0.0_8 NETWORK_OBJ_192.0.0.0_8 no-proxy-arp route-lookup 
 pager lines 23
 logging enable
 logging timestamp rfc5424
