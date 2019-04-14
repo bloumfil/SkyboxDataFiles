@@ -14,7 +14,7 @@ ip ssh version 2
 access-list 1 permit any log
 line vty 0 4
 access-class 1 in
-username skyboxview privilege 0 password 0 skyboxview
+username skyboxview privilege 5 password 0 skyboxview
 enable password skyboxview
 write memory
 exit

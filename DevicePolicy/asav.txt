@@ -71,58 +71,11 @@ group-object HTTPS
 group-object Service_80_TCP
 group-object Service_8443_TCP
 group-object Service_9443_TCP
-access-list ALLOW_ALL extended permit ip any any 
-access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
-access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev
-access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
-access-list EXTERNAL_IN extended deny ip any any
-access-list Internal_cryptomap_1 extended permit ip 10.0.0.0 255.0.0.0 192.0.0.0 255.0.0.0
-nat (Internal,Internal) source static NETWORK_OBJ_10.0.0.0_8 NETWORK_OBJ_10.0.0.0_8 destination static NETWORK_OBJ_192.0.0.0_8 NETWORK_OBJ_192.0.0.0_8 no-proxy-arp route-lookup 
-pager lines 23
-logging enable
-logging timestamp rfc5424
-logging monitor informational
-logging device-id hostname
-logging host management <<__D__sbsrv__SN__Management_Network__D__>> 6/5514
-logging permit-hostdown
-mtu management 1500
-mtu Internal 1500
-mtu External 1500
-no failover
-icmp unreachable rate-limit 1 burst-size 1
-no asdm history enable
-arp timeout 14400
-arp rate-limit 16384
-access-group EXTERNAL_IN in interface External
-route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
-route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
-route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
-timeout xlate 3:00:00
-timeout pat-xlate 0:00:30
-timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
-timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
-timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
-timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
-timeout tcp-proxy-reassembly 0:01:00
-timeout floating-conn 0:00:00
-timeout conn-holddown 0:00:15
-timeout igp stale-route 0:01:10
-user-identity default-domain LOCAL
-aaa authentication ssh console LOCAL
-aaa authentication login-history
-http server enable
-http 10.0.0.0 255.0.0.0 management
-no snmp-server location
-no snmp-server contact
 crypto ipsec ikev2 ipsec-proposal aaa
  protocol esp encryption aes-gcm-256
  protocol esp integrity sha-512
 crypto ipsec security-association pmtu-aging infinite
-crypto map Internal_map0 1 match address Internal_cryptomap
+crypto map Internal_map0 1 match address Internal_cryptomap_1
 crypto map Internal_map0 1 set peer 192.168.14.14 
 crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
 crypto map Internal_map0 interface Internal
@@ -157,6 +110,58 @@ crypto ikev2 policy 40
  prf sha
  lifetime seconds 86400
 crypto ikev2 enable Internal
+access-list ALLOW_ALL extended permit ip any any 
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
+access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
+access-list EXTERNAL_IN extended deny ip any any
+access-list Internal_cryptomap_1 extended permit ip 10.0.0.0 255.0.0.0 192.0.0.0 255.0.0.0
+nat (Internal,Internal) source static NETWORK_OBJ_10.0.0.0_8 NETWORK_OBJ_10.0.0.0_8 destination static NETWORK_OBJ_192.0.0.0_8 NETWORK_OBJ_192.0.0.0_8 no-proxy-arp route-lookup 
+pager lines 23
+logging enable
+logging timestamp rfc5424
+logging monitor informational
+logging device-id hostname
+logging host management <<__D__sbsrv__SN__Management_Network__D__>>
+logging permit-hostdown
+mtu management 1500
+mtu Internal 1500
+mtu External 1500
+no failover
+icmp unreachable rate-limit 1 burst-size 1
+no asdm history enable
+arp timeout 14400
+arp rate-limit 16384
+access-group EXTERNAL_IN in interface External
+route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
+route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
+route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route Internal 192.170.0.0 255.255.0.0 192.170.0.1 1
+route Internal 192.171.0.0 255.255.0.0 192.170.0.1 1
+route Internal 192.173.0.0 255.255.0.0 192.170.0.1 1
+route Internal 193.170.0.0 255.255.0.0 192.170.0.1 1
+route Internal 200.160.0.0 255.255.0.0 192.170.0.1 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+timeout conn-holddown 0:00:15
+timeout igp stale-route 0:01:10
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL
+aaa authentication login-history
+http server enable
+http 10.0.0.0 255.0.0.0 management
+no snmp-server location
+no snmp-server contact
 telnet timeout 5
 ssh stricthostkeycheck
 ssh 0.0.0.0 0.0.0.0 management
@@ -213,10 +218,11 @@ prompt hostname context
 no call-home reporting anonymous
 no service-policy global_policy global
 username vlab_user password vLab@SB123456 privilege 15
-username skyboxview password skyboxview privilege 15
+username skyboxview password skyboxview privilege 0
 interface Management0/0
 description Management_Network
 management-only
 nameif management
 ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
 security-level 0
+enable password skyboxview pbkdf2
