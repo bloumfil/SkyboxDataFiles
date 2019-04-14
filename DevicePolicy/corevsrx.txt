@@ -12,3 +12,9 @@ set routing-instances vsrx-vr1 routing-options static route <<__SN__Dev__SN__>> 
 set routing-instances vsrx-vr1 routing-options static route 192.0.0.0/8 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
 set system services web-management https system-generated-certificate
 set system services web-management https interface ge-0/0/4.0
+set interfaces ge-0/0/0 unit 0 description App_DB_Transit
+set interfaces ge-0/0/1 unit 0 description Internal_Transit
+set interfaces ge-0/0/2 unit 0 description Clients
+set interfaces ge-0/0/3 unit 0 description CP_SRX_Transit
+set interfaces ge-0/0/4 unit 0 description Management_Network
+set interfaces ge-0/0/5 unit 0 description Web_Dev_Transit
