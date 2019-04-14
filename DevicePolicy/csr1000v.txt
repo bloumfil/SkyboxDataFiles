@@ -1,3 +1,4 @@
+username skyboxview privilege 0 password 0 skyboxview
 interface GigabitEthernet1
 ip address <<__D__csr1000v__SN__CSR_Transit__D__>> 255.255.255.240
 no shutdown
@@ -13,4 +14,7 @@ ip ssh version 2
 access-list 1 permit any log
 line vty 0 4
 access-class 1 in
+username skyboxview privilege 0 password 0 skyboxview
+enable password skyboxview
+write memory
 exit
