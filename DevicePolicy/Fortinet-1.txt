@@ -1,6 +1,6 @@
 config system dns
 set primary 192.168.90.5
-set secondary 192.168.90.28
+set secondary 192.168.90.29
 end
 
 config firewall policy
@@ -79,6 +79,15 @@ set vdom "root"
 set password ENC SH29Jn9dFeIpCK1kLoFMxLQEBiLdUAdrKtUvKYRMjOFHAWLmA3jz2Dfx+UHOMM=
 next
 end
+
+config system admin
+edit "skyboxview"
+set accprofile "prof_admin"
+set vdom "root"
+set password ENC SH25nbDe+xvXrMiCW9LIUIif8nLfmzqKyrc6DYh/gT3SLhMFkjh3lDx11NEFQM=
+next
+end
+
 
 config system admin
 edit "vlab_user"
