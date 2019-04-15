@@ -15,10 +15,6 @@ modify sys dns search replace-all-with { demo.skybox.com }
 modify sys management-ip <<__D__f5loadbalancer__SN__Management_Network__D__>>/28 description configured-statically
 modify sys management-route default gateway <<__D__corevsrx__SN__Management_Network__D__>>
 delete sys management-route dhclient_route1
-create net vlan internal { description DMZ_Server_Farm }
-modify net vlan internal interfaces add { 1.1 { } }
-create net vlan external { description DMZ }
-modify net vlan external interfaces add { 1.2 { } }
 create ltm node apacheweb1 address <<__D__apacheweb1__SN__DMZ_Server_Farm__D__>>
 create ltm node apacheweb11 address <<__D__apacheweb11__SN__DMZ_Server_Farm__D__>>
 create ltm node apacheweb12 address <<__D__apacheweb12__SN__DMZ_Server_Farm__D__>>
@@ -35,4 +31,8 @@ modify ltm virtual Apache_Web_Services source 0.0.0.0/0 translate-address enable
 modify ltm virtual Apache_Web_Services vlans add { external } vlans-enabled
 create ltm virtual IIS_Server_VIP description "IIS Server Services VIP" destination <<__DX__f5loadbalancer__SN__DMZ__PV__1__DX__>>:https ip-protocol tcp mask 255.255.255.255 pool IIS_Server_Pool
 modify ltm virtual IIS_Server_VIP vlans add { external } vlans-enabled
+create auth user skyboxview { encrypted-password $6$Y7AgfqE9$lPlC1vwS7IJssLSxYWAYq/wwbZ9PxyvXubv8we6mj54pSCZE/TwoSgKAm0koHbOMTfc9OfBviaMXOKvXKfawq1 shell tmsh }
+modify auth user skyboxview partition-access modify { all-partitions { role admin } }
+create auth user vlab_user { encrypted-password $6$qb2HR6ds$s4Y0cr0ZM5ZrQOpfGabt1eMJZB6HovzY1R2nA0pefjWkikPq8LE7aUcrYOC6y1DUD8sq4gGiISLm8oEabtqID/ shell tmsh }
+modify auth user vlab_user partition-access modify { all-partitions { role admin } }
 save /sys config
