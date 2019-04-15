@@ -15,6 +15,7 @@ access-list 1 permit any log
 line vty 0 4
 access-class 1 in
 username skyboxview privilege 5 password 0 skyboxview
+username vlab_user privilege 5 password 0 vLab@SB123456
 enable password skyboxview
 write memory
 exit

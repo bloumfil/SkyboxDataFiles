@@ -19,7 +19,13 @@ set interfaces ge-0/0/3 unit 0 description CP_SRX_Transit
 set interfaces ge-0/0/4 unit 0 description Management_Network
 set interfaces ge-0/0/5 unit 0 description Web_Dev_Transit
 set system syslog user * any emergency
-set system syslog host 192.30.80.76 any any
+set system syslog host <<__D__sbsrv__SN__Management_Network__D__>> any any
 set system syslog file messages any any
 set system syslog file messages authorization info
 set system syslog file interactive-commands interactive-commands any
+set system login user vlab_user uid 2001
+set system login user vlab_user class super-user
+set system login user vlab_user authentication encrypted-password "$5$09xQQtXm$.x6PAYv25wBg5HqgcUBf1qb.6i987xeGpyMBkh4XRz4"
+set system login user skyboxview uid 2002
+set system login user skyboxview class super-user
+set system login user skyboxview authentication encrypted-password "$6$42BBEM/l$TYOSSzmCc2UPlV4BSL3yJMo48bUQEnu.AlLWJggpPbj1JFVm4BAJ0fQBPxmW/lMJqqFYY1IMavn327nh1kLdW/"

@@ -22,9 +22,9 @@ subnet <<__NA__Web_App__NA__>> 255.255.255.240
 object network Internal_DB
 subnet <<__NA__Internal_DB__NA__>> 255.255.255.240
 object network Dev
-subnet <<__NA__Dev__NA__>> 255.255.255.240
+subnet <<__NA__Dev__NA__>> 255.255.255.248
 object network App_Developers
-subnet <<__NA__App_Developers__NA__>> 255.255.255.240
+subnet <<__NA__App_Developers__NA__>> 255.255.255.248
 object network Web_App_CentOS7
 host <<__D__apache-web1__SN__Web_App__D__>>
 object network Host_sbsrv
@@ -135,9 +135,8 @@ arp rate-limit 16384
 access-group EXTERNAL_IN in interface External
 route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route Internal <<__NA__Dev__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
-route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
-route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management <<__NA__Secops__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route Internal <<__NA__Dev__NA__>> 255.255.255.248 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
 route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
 route Internal 192.170.0.0 255.255.0.0 192.170.0.1 1
