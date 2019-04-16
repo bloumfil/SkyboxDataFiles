@@ -35,4 +35,5 @@ create auth user skyboxview { encrypted-password $6$Y7AgfqE9$lPlC1vwS7IJssLSxYWA
 modify auth user skyboxview partition-access modify { all-partitions { role admin } }
 create auth user vlab_user { encrypted-password $6$qb2HR6ds$s4Y0cr0ZM5ZrQOpfGabt1eMJZB6HovzY1R2nA0pefjWkikPq8LE7aUcrYOC6y1DUD8sq4gGiISLm8oEabtqID/ shell tmsh }
 modify auth user vlab_user partition-access modify { all-partitions { role admin } }
+modify auth user csadmin { encrypted-password $6$fBdVLYnB$ES9AG1rueCgsVrkT5PPz2Ro5oIK6zv8rZdtWSFbOfS2MoY9ABnY3EdQheLKEz7osrTLqQnGyduOKHXW4UUfX9. }
 save /sys config

@@ -17,7 +17,7 @@ clish -c "add user csadmin uid 0 homedir /home/csadmin"
 clish -c "add rba user csadmin roles adminRole"
 clish -c "set user csadmin gid 100 shell /bin/bash"
 clish -c "set user csadmin realname csadmin"
-clish -c "set user csadmin password-hash \$1\$Krogzoie$hcUoFoUDm1FRJG9pcLtUh0"
+clish -c "set user csadmin password-hash \$1\$Krogzoie\$hcUoFoUDm1FRJG9pcLtUh0"
 clish -c "save config"
 declare -x GW_DGW=`clish -c "show configuration static-route" | grep default | sed 's/on/off/'`
 clish -c "set static-route default nexthop gateway address <<__NX1__Internet_Transit__NX1__>> on"

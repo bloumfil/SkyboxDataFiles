@@ -1,3 +1,9 @@
+clish -c "add user csadmin uid 0 homedir /home/csadmin"
+clish -c "add rba user csadmin roles adminRole"
+clish -c "set user csadmin gid 100 shell /bin/bash"
+clish -c "set user csadmin realname csadmin"
+clish -c "set user csadmin password-hash \$1\$Krogzoie\$hcUoFoUDm1FRJG9pcLtUh0"
+clish -c "save config"
 clish -c "add user vlab_user uid 0 homedir /home/vlab_user"
 clish -c "add rba user vlab_user roles adminRole"
 clish -c "set user vlab_user gid 100 shell /bin/bash"
@@ -13,6 +19,7 @@ clish -c "save config"
 declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "<<__DG__wancpfw__DG__>>" | grep uid | head -1 | awk '{print $3}'`
 mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
 mgmt_cli -r true add opsec-application name "Skybox" host "sbsrv_in_Management_Network" cpmi.enabled "true" cpmi.use-administrator-credentials "true" lea.enabled "true" one-time-password "skyboxview"
+mgmt_cli -r true add administrator name "csadmin" password "P@ssw0rd1234" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
 mgmt_cli -r true add administrator name "vlab_user" password "vLab@SB123456" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
 mgmt_cli -r true add administrator name "skyboxview" password "skyboxview" must-change-password false authentication-method "INTERNAL_PASSWORD" permissions-profile "read write all" --domain 'System Data'
 mgmt_cli -r true set api-settings accepted-api-calls-from "All IP addresses" --domain 'System Data'
