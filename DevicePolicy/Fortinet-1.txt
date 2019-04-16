@@ -73,6 +73,14 @@ next
 end
 
 config system admin
+edit "admin"
+set accprofile "super_admin"
+set vdom "root"
+set password ENC SH2Pn7lTaBdPA3fOZPwz8Ya0kU3F0ZaFZC9STRnfml2CeNFfDITjd+KeggkGwA=
+next
+end
+
+config system admin
 edit "skybox"
 set accprofile "prof_admin"
 set vdom "root"
