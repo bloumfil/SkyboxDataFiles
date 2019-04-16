@@ -29,3 +29,4 @@ set system login user vlab_user authentication encrypted-password "$5$09xQQtXm$.
 set system login user skyboxview uid 2002
 set system login user skyboxview class super-user
 set system login user skyboxview authentication encrypted-password "$6$42BBEM/l$TYOSSzmCc2UPlV4BSL3yJMo48bUQEnu.AlLWJggpPbj1JFVm4BAJ0fQBPxmW/lMJqqFYY1IMavn327nh1kLdW/"
+set groups azure-provision system login user csadmin authentication encrypted-password "$5$Pad/ots5$KCA73OKQlPNyGA4TcIZdlYdHkDY3CIoUrH/L.6eYjFA"
