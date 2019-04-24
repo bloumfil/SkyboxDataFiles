@@ -16,5 +16,5 @@ set mgt-config users vlab_user phash $1$qpqkdjsm$hR9M3aqs8KoV2yJ6SrKmw1
 set mgt-config users skyboxview permissions role-based superuser yes
 set mgt-config users skyboxview phash $1$AD6R3WCn\$kAcKsJ3it1NMsHJlYDh731
 set deviceconfig system panorama-server 192.168.90.25
-set deviceconfig system timezone GMT
+set deviceconfig system timezone UTC
 commit

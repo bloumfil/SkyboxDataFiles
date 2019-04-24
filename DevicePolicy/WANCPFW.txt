@@ -28,3 +28,5 @@ clish -c "save config"
 clish -c "set static-route 192.168.120.0/24 nexthop gateway address <<__D__corevsrx__SN__CP_SRX_Transit__D__>> priority 1 on
 clish -c "set static-route 192.168.190.0/24 nexthop gateway address <<__D__corevsrx__SN__CP_SRX_Transit__D__>> priority 1 on
 clish -c "save config"
+clish -c "set timezone Etc / GMT"
+clish -c "save config"

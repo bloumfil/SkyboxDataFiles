@@ -16,6 +16,8 @@ clish -c "set user skyboxview gid 100 shell /bin/bash"
 clish -c "set user skyboxview realname skyboxview"
 clish -c "set user skyboxview password-hash \$1\$AD6R3WCn\$kAcKsJ3it1NMsHJlYDh731"
 clish -c "save config"
+clish -c "set timezone Etc / GMT"
+clish -c "save config"
 declare -x GW_UID=`mgmt_cli -r true show-generic-objects name "<<__DG__wancpfw__DG__>>" | grep uid | head -1 | awk '{print $3}'`
 mgmt_cli -r true set-generic-object uid $GW_UID  hideInternalInterfaces true
 mgmt_cli -r true add opsec-application name "Skybox" host "sbsrv_in_Management_Network" cpmi.enabled "true" cpmi.use-administrator-credentials "true" lea.enabled "true" one-time-password "skyboxview"

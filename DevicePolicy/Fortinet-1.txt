@@ -3,6 +3,10 @@ set primary 192.168.90.5
 set secondary 192.168.90.29
 end
 
+config system global
+set timezone 80
+end
+
 config firewall policy
 edit 100
 set name "Deny All DB to Core"
