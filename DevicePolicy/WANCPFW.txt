@@ -25,6 +25,7 @@ clish -c "$GW_DGW"
 clish -c "save config"
 clish -c "set interface eth2 ipv4-address <<__DX__wancpfw__SN__Internet_Transit__PV__0__DX__>> mask-length 28"
 clish -c "save config"
+clish -c "set static-route <<__SN__DMZ_Server_Farm__SN__>> nexthop gateway address <<__D__f5loadbalancer__SN__DMZ__D__>> priority 1 on
 clish -c "set static-route 192.168.120.0/24 nexthop gateway address <<__D__corevsrx__SN__CP_SRX_Transit__D__>> priority 1 on
 clish -c "set static-route 192.168.190.0/24 nexthop gateway address <<__D__corevsrx__SN__CP_SRX_Transit__D__>> priority 1 on
 clish -c "save config"
