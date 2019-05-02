@@ -18,5 +18,5 @@ username vlab_user privilege 5 password 0 vLab@SB123456
 username csadmin privilege 15 password 0 P@ssw0rd1234
 enable password skyboxview
 clock timezone UTC 0
-write memory
+do write memory
 exit
