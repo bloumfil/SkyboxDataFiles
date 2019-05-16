@@ -123,6 +123,7 @@ pager lines 23
 logging enable
 logging timestamp rfc5424
 logging monitor informational
+logging trap informational
 logging device-id hostname
 logging host management <<__D__sbsrv__SN__Management_Network__D__>>
 logging permit-hostdown
