@@ -18,6 +18,7 @@ set interfaces ge-0/0/2 unit 0 description Clients
 set interfaces ge-0/0/3 unit 0 description CP_SRX_Transit
 set interfaces ge-0/0/4 unit 0 description Management_Network
 set interfaces ge-0/0/5 unit 0 description Web_Dev_Transit
+set interfaces ge-0/0/6 unit 0 description Secops_Network
 set system syslog user * any emergency
 set system syslog host <<__D__sbsrv__SN__Management_Network__D__>> any any
 set system syslog file messages any any

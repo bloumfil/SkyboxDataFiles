@@ -5,7 +5,7 @@ interface GigabitEthernet2
 ip address <<__D__csr1000v__SN__Web_App__D__>> 255.255.255.240
 no shutdown
 interface GigabitEthernet3
-ip address <<__D__csr1000v__SN__Dev__D__>> 255.255.255.240
+ip address <<__D__csr1000v__SN__Dev__D__>> 255.255.255.248
 no shutdown
 ip route 0.0.0.0 0.0.0.0 <<__D__asav__SN__CSR_Transit__D__>>
 no ip route 0.0.0.0 0.0.0.0 <<__NX1__CSR_Transit__NX1__>>
