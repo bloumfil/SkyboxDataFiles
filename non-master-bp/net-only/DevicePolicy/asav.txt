@@ -1,0 +1,230 @@
+terminal width 511
+clock timezone UTC 0
+interface GigabitEthernet0/0
+no shutdown
+description CSR_Transit
+nameif Internal
+security-level 100
+ip address <<__D__asav__SN__CSR_Transit__D__>> 255.255.255.240 
+interface GigabitEthernet0/1
+no shutdown
+description Web_Dev_Transit
+nameif External
+security-level 0
+ip address <<__D__asav__SN__Web_Dev_Transit__D__>> 255.255.255.240
+object network All_<<__NA__SandboxWide__NA__>>
+subnet <<__NA__SandboxWide__NA__>> 255.255.255.0
+object network CSR_Transit
+subnet <<__NA__CSR_Transit__NA__>> 255.255.255.240
+object network DMZ_Server_Farm
+subnet <<__NA__DMZ_Server_Farm__NA__>> 255.255.255.240
+object network Web_App
+subnet <<__NA__Web_App__NA__>> 255.255.255.240
+object network Internal_DB
+subnet <<__NA__Internal_DB__NA__>> 255.255.255.240
+object network Dev
+subnet <<__NA__Dev__NA__>> 255.255.255.248
+object network App_Developers
+subnet <<__NA__App_Developers__NA__>> 255.255.255.248
+object network Web_App_CentOS7
+host <<__D__apache-web1__SN__Web_App__D__>>
+object network Host_sbsrv
+host <<__D__sbsrv__SN__Management_Network__D__>>
+object network CSR1000v
+host <<__D__csr1000v__SN__CSR_Transit__D__>>
+object network NETWORK_OBJ_192.0.0.0_8
+subnet 192.0.0.0 255.0.0.0
+object network NETWORK_OBJ_10.0.0.0_8
+subnet 10.0.0.0 255.0.0.0
+object-group service Service_22_TCP
+service-object tcp destination eq ssh 
+object-group service HTTP
+service-object tcp destination eq www 
+object-group service HTTPS
+service-object tcp destination eq https 
+object-group network Group_sbsrvers
+network-object object Host_sbsrv
+object-group service App_DB_Services
+group-object HTTP
+group-object HTTPS
+object-group service ICMP_Any
+service-object icmp
+service-object icmp echo
+service-object icmp echo-reply
+object-group service SSH
+service-object tcp destination eq ssh 
+object-group service OG_S_ICMP_SSH
+group-object ICMP_Any
+group-object SSH
+object-group service Service_80_TCP
+service-object tcp destination eq www 
+object-group service Service_443_TCP
+service-object tcp destination eq https 
+object-group service Service_3306_TCP
+service-object tcp destination eq 3306
+object-group service Service_8443_TCP
+service-object tcp destination eq 8443
+object-group service Service_9443_TCP
+service-object tcp destination eq 9443
+object-group service Development_Services
+group-object Service_22_TCP
+group-object HTTPS
+group-object Service_80_TCP
+group-object Service_8443_TCP
+group-object Service_9443_TCP
+crypto ipsec ikev2 ipsec-proposal aaa
+ protocol esp encryption aes-gcm-256
+ protocol esp integrity sha-512
+crypto ipsec security-association pmtu-aging infinite
+crypto map Internal_map0 1 match address Internal_cryptomap_1
+crypto map Internal_map0 1 set peer 192.168.14.14 
+crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
+crypto map Internal_map0 interface Internal
+crypto ikev2 policy 1
+ encryption aes-256
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 10
+ encryption aes-192
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 20
+ encryption aes
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 30
+ encryption 3des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 40
+ encryption des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 enable Internal
+access-list ALLOW_ALL extended permit ip any any 
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
+access-list EXTERNAL_IN extended permit object-group Development_Services object App_Developers object Dev
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object Web_App_CentOS7 log
+access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object All_<<__NA__SandboxWide__NA__>> object CSR1000v log
+access-list EXTERNAL_IN extended deny ip any any
+access-list Internal_cryptomap_1 extended permit ip 10.0.0.0 255.0.0.0 192.0.0.0 255.0.0.0
+nat (Internal,Internal) source static NETWORK_OBJ_10.0.0.0_8 NETWORK_OBJ_10.0.0.0_8 destination static NETWORK_OBJ_192.0.0.0_8 NETWORK_OBJ_192.0.0.0_8 no-proxy-arp route-lookup 
+pager lines 23
+logging enable
+logging timestamp rfc5424
+logging monitor informational
+logging trap informational
+logging device-id hostname
+logging host management <<__D__sbsrv__SN__Management_Network__D__>>
+logging permit-hostdown
+mtu management 1500
+mtu Internal 1500
+mtu External 1500
+no failover
+icmp unreachable rate-limit 1 burst-size 1
+no asdm history enable
+arp timeout 14400
+arp rate-limit 16384
+access-group EXTERNAL_IN in interface External
+route Internal <<__NA__Web_App__NA__>> 255.255.255.240 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
+route management <<__NA__Clients__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management <<__NA__Secops__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route Internal <<__NA__Dev__NA__>> 255.255.255.248 <<__D__csr1000v__SN__CSR_Transit__D__>> 1
+route management 192.168.120.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route management 192.168.190.0 255.255.255.0 <<__D__corevsrx__SN__Management_Network__D__>> 1
+route Internal 192.170.0.0 255.255.0.0 192.170.0.1 1
+route Internal 192.171.0.0 255.255.0.0 192.170.0.1 1
+route Internal 192.173.0.0 255.255.0.0 192.170.0.1 1
+route Internal 193.170.0.0 255.255.0.0 192.170.0.1 1
+route Internal 200.160.0.0 255.255.0.0 192.170.0.1 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+timeout conn-holddown 0:00:15
+timeout igp stale-route 0:01:10
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL
+aaa authentication login-history
+http server enable
+http 10.0.0.0 255.0.0.0 management
+no snmp-server location
+no snmp-server contact
+telnet timeout 5
+ssh stricthostkeycheck
+ssh 0.0.0.0 0.0.0.0 management
+ssh 0.0.0.0 0.0.0.0 External
+ssh timeout 60
+ssh version 2
+ssh key-exchange group dh-group1-sha1
+console timeout 0
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+ntp server 185.40.95.3 source External
+group-policy GroupPolicy1 internal
+group-policy GroupPolicy1 attributes
+ vpn-tunnel-protocol ikev2
+dynamic-access-policy-record DfltAccessPolicy
+tunnel-group 192.168.14.14 type ipsec-l2l
+tunnel-group 192.168.14.14 general-attributes
+ default-group-policy GroupPolicy1
+tunnel-group 192.168.14.14 ipsec-attributes
+ ikev2 remote-authentication pre-shared-key skyboxview
+ ikev2 local-authentication pre-shared-key skyboxview
+class-map inspection_default
+match default-inspection-traffic
+class-map tcp_bypass
+description "TCP traffic bypassing stateful inspection"
+match access-list ALLOW_ALL
+policy-map type inspect dns preset_dns_map
+parameters
+message-length maximum client auto
+message-length maximum 512
+no tcp-inspection
+policy-map global_policy
+class inspection_default
+inspect dns preset_dns_map 
+inspect ftp 
+inspect h323 h225 
+inspect h323 ras 
+inspect rsh 
+inspect rtsp 
+inspect esmtp 
+inspect sqlnet 
+inspect skinny  
+inspect sunrpc 
+inspect xdmcp 
+inspect sip  
+inspect netbios 
+inspect tftp 
+inspect ip-options
+policy-map tcp_bypass_policy
+class tcp_bypass
+set connection advanced-options tcp-state-bypass
+prompt hostname context
+no call-home reporting anonymous
+no service-policy global_policy global
+username vlab_user password vLab@SB123456 privilege 15
+username skyboxview password skyboxview privilege 0
+interface Management0/0
+description Management_Network
+management-only
+nameif management
+ip address <<__D__asav__SN__Management_Network__D__>> 255.255.255.240
+security-level 0
+enable password skyboxview pbkdf2
