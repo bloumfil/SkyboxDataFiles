@@ -9,9 +9,13 @@ set routing-instances vsrx-vr1 routing-options static route <<__SN__CSR_Transit_
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Internal_DB__SN__>> next-hop <<__D__Fortinet-1__SN__App_DB_Transit__D__>> 
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Web_App__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
 set routing-instances vsrx-vr1 routing-options static route <<__SN__Dev__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
-set routing-instances vsrx-vr1 routing-options static route 192.0.0.0/8 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 192.170.0.0/16 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 192.171.0.0/16 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 192.173.0.0/16 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 193.170.0.0/16 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 200.160.0.0/16 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
 set system services web-management https system-generated-certificate
-set system services web-management https interface ge-0/0/4.0
+set system services web-management https interface ge-0/0/5.0
 set interfaces ge-0/0/0 unit 0 description App_DB_Transit
 set interfaces ge-0/0/1 unit 0 description Internal_Transit
 set interfaces ge-0/0/2 unit 0 description Clients
