@@ -33,8 +33,7 @@ echo "<<__D__webmain__SN__DMZ_Server_Farm__D__>> - webmain_in_DMZ_Server_Farm" >
 echo "<<__D__pafw__SN__Management_Network__D__>> - pafw_in_Management_Network" >> /home/skyboxview/hosts.txt
 echo "<<__D__pafw__SN__Internal_Transit__D__>> - pafw_in_Internal_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__pafw__SN__Internal_Servers__D__>> - pafw_in_Internal_Servers" >> /home/skyboxview/hosts.txt
-echo "<<__D__secops_2__SN__Clients__D__>> - secops_2_in_Clients" >> /home/skyboxview/hosts.txt
-echo "<<__D__secops_2__SN__Internet_Transit__D__>> - secops_2_in_Internet_Transit" >> /home/skyboxview/hosts.txt
+echo "<<__D__secops_2__SN__Secops__D__>> - secops_2_in_Secops" >> /home/skyboxview/hosts.txt
 echo "<<__D__tgt__SN__Management_Network__D__>> - tgt_in_Management_Network" >> /home/skyboxview/hosts.txt
 echo "<<__D__corevsrx__SN__Azure_Transit__D__>> - corevsrx_in_Azure_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__corevsrx__SN__App_DB_Transit__D__>> - corevsrx_in_App_DB_Transit" >> /home/skyboxview/hosts.txt
@@ -65,8 +64,7 @@ echo "<<__D__fortinet-1__SN__App_DB_Transit__D__>> - fortinet-1_in_App_DB_Transi
 echo "<<__D__fortinet-1__SN__Internal_DB__D__>> - fortinet-1_in_Internal_DB" >> /home/skyboxview/hosts.txt
 echo "<<__D__fortinet-1__SN__App_Developers__D__>> - fortinet-1_in_App_Developers" >> /home/skyboxview/hosts.txt
 echo "<<__D__apacheweb11__SN__DMZ_Server_Farm__D__>> - apacheweb11_in_DMZ_Server_Farm" >> /home/skyboxview/hosts.txt
-echo "<<__D__secops_1__SN__Clients__D__>> - secops_1_in_Clients" >> /home/skyboxview/hosts.txt
-echo "<<__D__secops_1__SN__Internet_Transit__D__>> - secops_1_in_Internet_Transit" >> /home/skyboxview/hosts.txt
+echo "<<__D__secops_1__SN__Secops__D__>> - secops_1_in_Secops" >> /home/skyboxview/hosts.txt
 echo "<<__D__apache-web1__SN__Web_App__D__>> - apache-web1_in_Web_App" >> /home/skyboxview/hosts.txt
 chown skyboxview:skyboxview /home/skyboxview/hosts.txt
 echo > /etc/resolv.conf
