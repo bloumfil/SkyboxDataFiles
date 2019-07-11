@@ -92,10 +92,6 @@ crypto ipsec ikev2 ipsec-proposal aaa
  protocol esp encryption aes-gcm-256
  protocol esp integrity sha-512
 crypto ipsec security-association pmtu-aging infinite
-crypto map Internal_map0 1 match address Internal_cryptomap_1
-crypto map Internal_map0 1 set peer 192.168.14.14 
-crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
-crypto map Internal_map0 interface Internal
 crypto ikev2 policy 1
  encryption aes-256
  integrity sha
@@ -126,6 +122,10 @@ crypto ikev2 policy 40
  group 5 2
  prf sha
  lifetime seconds 86400
+crypto map Internal_map0 1 match address Internal_cryptomap_1
+crypto map Internal_map0 1 set peer 192.168.14.14 
+crypto map Internal_map0 1 set ikev2 ipsec-proposal aaa
+crypto map Internal_map0 interface Internal
 crypto ikev2 enable Internal
 access-list ALLOW_ALL extended permit ip any any 
 access-list EXTERNAL_IN extended permit object-group OG_S_ICMP_SSH object-group Group_sbsrvers object CSR1000v log
