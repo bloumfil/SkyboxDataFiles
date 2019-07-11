@@ -21,7 +21,7 @@ subnet <<__NA__DMZ_Server_Farm__NA__>> 255.255.255.240
 object network Web_App
 subnet <<__NA__Web_App__NA__>> 255.255.255.240
 object network Internal_DB
-subnet <<__NA__Internal_DB__NA__>> 255.255.255.240
+subnet <<__NA__Internal_DB__NA__>> 255.255.255.248
 object network Dev
 subnet <<__NA__Dev__NA__>> 255.255.255.248
 object network App_Developers
