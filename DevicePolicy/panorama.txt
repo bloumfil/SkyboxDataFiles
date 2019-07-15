@@ -132,4 +132,4 @@ set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_A
 set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All log-start yes
 set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All log-setting To_Panorama
 exit
-commit-all shared-policy device-group <<__PA__DEVICE_GROUP__PA__>>
+commit-all shared-policy merge-with-candidate-cfg yes device-group <<__PA__DEVICE_GROUP__PA__>> devices <<__PA__SERIAL_NO__PA__>> vsys [ vsys1 ]
