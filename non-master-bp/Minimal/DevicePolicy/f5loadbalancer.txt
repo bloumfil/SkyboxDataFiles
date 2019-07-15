@@ -1,0 +1,40 @@
+mv cm device bigip1 f5loadbalancer.demo.skybox.com
+modify sys global-settings hostname f5loadbalancer.demo.skybox.com
+modify sys global-settings gui-setup disabled
+modify sys global-settings mgmt-dhcp disabled
+modify sys ntp timezone UTC
+create net vlan internal { description DMZ_Server_Farm }
+modify net vlan internal interfaces add { 1.1 { } }
+create net vlan external { description DMZ }
+modify net vlan external interfaces add { 1.2 { } }
+modify net interface 1.1 { description DMZ_Server_Farm lldp-tlvmap 114552 }
+modify net interface 1.2 { description DMZ lldp-tlvmap 114552 }
+create net self DMZ_Server_Fram { address <<__D__f5loadbalancer__SN__DMZ_Server_Farm__D__>>/28 allow-service add { default } traffic-group traffic-group-local-only  vlan internal }
+create net self DMZ { address <<__D__f5loadbalancer__SN__DMZ__D__>>/28 traffic-group traffic-group-local-only  vlan external }
+create net route external_default_gateway gw <<__D__wancpfw__SN__DMZ__D__>> network default
+modify sys dns search replace-all-with { demo.skybox.com }
+modify sys management-ip <<__D__f5loadbalancer__SN__Management_Network__D__>>/28 description configured-statically
+modify sys management-route default gateway <<__D__corevsrx__SN__Management_Network__D__>>
+delete sys management-route dhclient_route1
+create ltm node apacheweb1 address <<__D__apacheweb1__SN__DMZ_Server_Farm__D__>>
+create ltm node apacheweb11 address <<__D__apacheweb11__SN__DMZ_Server_Farm__D__>>
+create ltm node apacheweb12 address <<__D__apacheweb12__SN__DMZ_Server_Farm__D__>>
+create ltm node w12web address <<__D__w12web__SN__DMZ_Server_Farm__D__>>
+create ltm pool Apache_Web_Pool description "Apache Web Pool" monitor gateway_icmp
+modify ltm pool Apache_Web_Pool members add { apacheweb1:https }
+modify ltm pool Apache_Web_Pool members add { apacheweb11:https }
+modify ltm pool Apache_Web_Pool members add { apacheweb12:https }
+create ltm pool IIS_Server_Pool description "IIS_Server_Pool" monitor gateway_icmp
+modify ltm pool IIS_Server_Pool members add { w12web:https }
+create ltm virtual Apache_Web_Services description "Apache Web VIP" destination <<__DX__f5loadbalancer__SN__DMZ__PV__0__DX__>>:https ip-protocol tcp mask 255.255.255.255 pool Apache_Web_Pool
+modify ltm virtual Apache_Web_Services profiles add { clientssl { context clientside } }
+modify ltm virtual Apache_Web_Services source 0.0.0.0/0 translate-address enabled translate-port enabled
+modify ltm virtual Apache_Web_Services vlans add { external } vlans-enabled
+create ltm virtual IIS_Server_VIP description "IIS Server Services VIP" destination <<__DX__f5loadbalancer__SN__DMZ__PV__1__DX__>>:https ip-protocol tcp mask 255.255.255.255 pool IIS_Server_Pool
+modify ltm virtual IIS_Server_VIP vlans add { external } vlans-enabled
+create auth user skyboxview { encrypted-password $6$Y7AgfqE9$lPlC1vwS7IJssLSxYWAYq/wwbZ9PxyvXubv8we6mj54pSCZE/TwoSgKAm0koHbOMTfc9OfBviaMXOKvXKfawq1 shell tmsh }
+modify auth user skyboxview partition-access modify { all-partitions { role admin } }
+create auth user vlab_user { encrypted-password $6$qb2HR6ds$s4Y0cr0ZM5ZrQOpfGabt1eMJZB6HovzY1R2nA0pefjWkikPq8LE7aUcrYOC6y1DUD8sq4gGiISLm8oEabtqID/ shell tmsh }
+modify auth user vlab_user partition-access modify { all-partitions { role admin } }
+modify auth user csadmin { encrypted-password $6$fBdVLYnB$ES9AG1rueCgsVrkT5PPz2Ro5oIK6zv8rZdtWSFbOfS2MoY9ABnY3EdQheLKEz7osrTLqQnGyduOKHXW4UUfX9. }
+save /sys config

@@ -1,0 +1,10 @@
+netsh interface ipv4 set address name="Ethernet 3" static <<__D__secops_1__SN__Internet_Transit__D__>> 255.255.255.240 <<__NX1__Internet_Transit__NX1__>>
+netsh interface ipv4 set dns name="Ethernet 3" static 192.168.90.5 validate=no
+netsh interface ip add dns name="Ethernet 3" addr=192.168.90.29 index=2 validate=no
+reg add HKLM\System\currentcontrolset\services\tcpip\parameters /v "SearchList" /d "demo.skybox.com" /f
+route add -p <<__NA__SandboxWide__NA__>> mask 255.255.255.0 <<__D__corevsrx__SN__Clients__D__>> metric 1
+route add -p 192.168.90.0 mask 255.255.255.0 <<__D__corevsrx__SN__Clients__D__>> metric 1
+route add -p 192.168.120.0 mask 255.255.255.0 <<__D__corevsrx__SN__Clients__D__>> metric 1
+netsh interface ipv4 set dns name="Ethernet" static 192.168.90.5 validate=no
+netsh interface ip add dns name="Ethernet" addr=192.168.90.29 index=2 validate=no
+netsh interface ipv4 set address name="Ethernet" static <<__D__secops_1__SN__Clients__D__>> 255.255.255.240
