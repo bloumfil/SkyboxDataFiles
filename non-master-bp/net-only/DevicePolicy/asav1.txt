@@ -1,2 +1,0 @@
-route External <<__NA__Management_Network__NA__>> 255.255.255.240 <<__D__corevsrx__SN__Web_Dev_Transit__D__>>
-route External 0.0.0.0 0.0.0.0 <<__D__corevsrx__SN__Web_Dev_Transit__D__>> 1
