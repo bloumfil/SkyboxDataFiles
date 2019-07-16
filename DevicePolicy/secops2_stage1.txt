@@ -4,4 +4,4 @@ route add -p 192.168.90.0 mask 255.255.255.0 <<__D__corevsrx__SN__Secops__D__>> 
 route add -p 192.168.120.0 mask 255.255.255.0 <<__D__corevsrx__SN__Secops__D__>> metric 1
 netsh interface ipv4 set dns name="Ethernet" static 192.168.90.5 validate=no
 netsh interface ip add dns name="Ethernet" addr=192.168.90.29 index=2 validate=no
-netsh interface ipv4 set address name="Ethernet" static <<__D__secops_2__SN__Secops__D__>> 255.255.255.240
+netsh interface ipv4 set address name="Ethernet" static <<__D__secops_2__SN__Secops__D__>> 255.255.255.240 <<__NX1__Secops__NX1__>>
