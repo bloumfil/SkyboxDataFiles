@@ -1,0 +1,67 @@
+[
+    {
+        "Name": "Internet_Transit", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "Internet"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }
+        ]
+    }, 
+
+	    {
+        "Name": "Secops", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }
+        ]
+    },
+	
+    {
+        "Name": "Management_Network", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }
+        ]
+    }
+]

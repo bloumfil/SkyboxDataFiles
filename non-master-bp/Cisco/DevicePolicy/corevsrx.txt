@@ -1,0 +1,35 @@
+set routing-instances vsrx-vr1 routing-options static route 0.0.0.0/0 next-hop <<__D__WANCPFW__SN__CP_SRX_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 0.0.0.0/0 metric 1 
+set routing-instances vsrx-vr1 routing-options static route <<__SN__Internal_Servers__SN__>> next-hop <<__D__pafw__SN__Internal_Transit__D__>> 
+set routing-instances vsrx-vr1 routing-options static route <<__SN__DMZ__SN__>> next-hop <<__D__WANCPFW__SN__CP_SRX_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route <<__SN__DMZ_Server_Farm__SN__>> next-hop <<__D__WANCPFW__SN__CP_SRX_Transit__D__>> 
+set routing-instances vsrx-vr1 routing-options static route <<__SN__App_Developers__SN__>> next-hop <<__D__Fortinet-1__SN__App_DB_Transit__D__>> 
+set routing-instances vsrx-vr1 routing-options static route <<__SN__Internet_Transit__SN__>> next-hop <<__D__WANCPFW__SN__CP_SRX_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route <<__SN__CSR_Transit__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route <<__SN__Internal_DB__SN__>> next-hop <<__D__Fortinet-1__SN__App_DB_Transit__D__>> 
+set routing-instances vsrx-vr1 routing-options static route <<__SN__Web_App__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route <<__SN__Dev__SN__>> next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set routing-instances vsrx-vr1 routing-options static route 192.0.0.0/8 next-hop <<__D__asav__SN__Web_Dev_Transit__D__>>
+set system services web-management https system-generated-certificate
+set system services web-management https interface ge-0/0/4.0
+set interfaces ge-0/0/0 unit 0 description App_DB_Transit
+set interfaces ge-0/0/1 unit 0 description Internal_Transit
+set interfaces ge-0/0/2 unit 0 description Clients
+set interfaces ge-0/0/3 unit 0 description CP_SRX_Transit
+set interfaces ge-0/0/4 unit 0 description Management_Network
+set interfaces ge-0/0/5 unit 0 description Web_Dev_Transit
+set interfaces ge-0/0/6 unit 0 description Secops_Network
+set system syslog user * any emergency
+set system syslog host <<__D__sbsrv__SN__Management_Network__D__>> any any
+set system syslog file messages any any
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system login user vlab_user uid 2001
+set system login user vlab_user class super-user
+set system login user vlab_user authentication encrypted-password "$5$09xQQtXm$.x6PAYv25wBg5HqgcUBf1qb.6i987xeGpyMBkh4XRz4"
+set system login user skyboxview uid 2002
+set system login user skyboxview class super-user
+set system login user skyboxview authentication encrypted-password "$6$42BBEM/l$TYOSSzmCc2UPlV4BSL3yJMo48bUQEnu.AlLWJggpPbj1JFVm4BAJ0fQBPxmW/lMJqqFYY1IMavn327nh1kLdW/"
+set groups azure-provision system login user csadmin authentication encrypted-password "$5$Pad/ots5$KCA73OKQlPNyGA4TcIZdlYdHkDY3CIoUrH/L.6eYjFA"
+set system time-zone UTC
+commit

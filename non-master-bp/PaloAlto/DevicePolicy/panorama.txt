@@ -1,0 +1,135 @@
+set mgt-config devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_53_UDP protocol udp port 53
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_139_UDP protocol udp port 139
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_445_UDP protocol udp port 445
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_139_TCP protocol tcp port 139
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_445_TCP protocol tcp port 445
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_380_TCP protocol tcp port 380
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_80_TCP protocol tcp port 80
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_444_TCP protocol tcp port 444
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_9443_TCP protocol tcp port 9443
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_22_TCP protocol tcp port 22
+set device-group <<__PA__DEVICE_GROUP__PA__>> service Service_23_TCP protocol tcp port 23
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list traffic-enhanced-app-logging log-type traffic
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list traffic-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list traffic-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list threat-enhanced-app-logging log-type threat
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list threat-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list threat-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list wildfire-enhanced-app-logging log-type wildfire
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list wildfire-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list wildfire-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list url-enhanced-app-logging log-type url
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list url-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list url-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list data-enhanced-app-logging log-type data
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list data-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list data-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list tunnel-enhanced-app-logging log-type tunnel
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list tunnel-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list tunnel-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list auth-enhanced-app-logging log-type auth
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list auth-enhanced-app-logging filter "All Logs"
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama match-list auth-enhanced-app-logging send-to-panorama yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama enhanced-application-logging yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> log-settings profiles To_Panorama disable-override yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 application any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 description "2/16/19 - Created by skyboxview for ticket 17
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 destination Internal_Servers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 from External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 service [ service-https Service_53_UDP Service_80_TCP Service_139_TCP Service_139_UDP Service_445_TCP Service_445_UDP ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 source App_Developers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 to Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_17_211 log-setting To_Panorama
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 application [ icmp ping traceroute ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 description "2/19/19 - Created by skyboxview for ticket 22"
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 destination sbcollector_in_Internal_Servers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 from External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 service any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 source sbsrv_in_Management_Network
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 to Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1-1 log-setting To_Panorama
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 application any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 description "2/19/19 - Created by skyboxview for ticket 22
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 destination [ sbcollector_in_Internal_Servers ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 from External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 service [ Service_22_TCP Service_444_TCP Service_9443_TCP ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 source sbsrv_in_Management_Network
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 to Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255 log-setting To_Panorama
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 application [ icmp ping traceroute ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 description "2/19/19 - Created by skyboxview for ticket 22"
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 destination sbsrv_in_Management_Network
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 from Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 service any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 source sbcollector_in_Internal_Servers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 to External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_22_255-1 log-setting To_Panorama
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 application any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 description "2/26/19 - Created by skyboxview for ticket 32"
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 destination sbsrv_in_Management_Network
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 from Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 service Service_22_TCP
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 source sbcollector_in_Internal_Servers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 to External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_32_286 hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 action allow
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 application any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 description "2/28/19 - Created by skyboxview for ticket 2"
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 destination Internal_Servers
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 from External
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 service [ Service_80_TCP Service_80_TCP ]
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 source Clients
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 target devices <<__PA__SERIAL_NO__PA__>>
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules skybox_2_12 to Internal
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All target negate no
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All to any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All from any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All source any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All destination any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All source-user any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All category any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All application any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All service any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All hip-profiles any
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All action deny
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All log-start yes
+set device-group <<__PA__DEVICE_GROUP__PA__>> pre-rulebase security rules Deny_All log-setting To_Panorama
+exit
+commit-all shared-policy device-group <<__PA__DEVICE_GROUP__PA__>>
