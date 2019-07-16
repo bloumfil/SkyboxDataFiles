@@ -42,6 +42,27 @@
         ]
     }, 
     {
+        "Name": "Secops", 
+        "routes": [
+            {
+                "cidr": "0.0.0.0/0", 
+                "destination": "Internet"
+            }, 
+            {
+                "cidr": "10.0.0.0/8", 
+                "destination": "None"
+            }, 
+            {
+                "cidr": "<<sandbox_wide_subnet>>", 
+                "destination": "<<Internal_Subnet>>"
+            }, 
+            {
+                "cidr": "<<self_CIDR>>", 
+                "destination": "VnetLocal"
+            }
+        ]
+    },
+        {
         "Name": "Clients", 
         "routes": [
             {
@@ -61,7 +82,7 @@
                 "destination": "VnetLocal"
             }
         ]
-    }, 
+    },  
     {
         "Name": "App_DB_Transit", 
         "routes": [
