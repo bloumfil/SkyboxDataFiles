@@ -42,7 +42,6 @@ echo "<<__D__corevsrx__SN__Clients__D__>> - corevsrx_in_Clients" >> /home/skybox
 echo "<<__D__corevsrx__SN__CP_SRX_Transit__D__>> - corevsrx_in_CP_SRX_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__corevsrx__SN__Management_Network__D__>> - corevsrx_in_Management_Network" >> /home/skyboxview/hosts.txt
 echo "<<__D__corevsrx__SN__Web_Dev_Transit__D__>> - corevsrx_in_Web_Dev_Transit" >> /home/skyboxview/hosts.txt
-echo "<<__D__sbcollector__SN__Internal_Servers__D__>> - sbcollector_in_Internal_Servers" >> /home/skyboxview/hosts.txt
 echo "<<__D__apacheweb1__SN__DMZ_Server_Farm__D__>> - apacheweb1_in_DMZ_Server_Farm" >> /home/skyboxview/hosts.txt
 echo "<<__D__csr1000v__SN__CSR_Transit__D__>> - csr1000v_in_CSR_Transit" >> /home/skyboxview/hosts.txt
 echo "<<__D__csr1000v__SN__Web_App__D__>> - csr1000v_in_Web_App" >> /home/skyboxview/hosts.txt
